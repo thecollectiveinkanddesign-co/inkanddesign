@@ -224,5 +224,3365 @@
   </div>
 
   <script src="script.js"></script>
+  <!-- =========================================================
+     COLLECTIVE DESIGNS
+     SECRET NIGHT GARDEN GAME + PRIZE WHEEL
+
+     Logo:
+     assets/cd logo.png
+
+     FLOW:
+     Logo → Word Search → Win → Prize Wheel → Reward
+     ========================================================= -->
+
+
+<style>
+
+/* =========================================================
+   SECRET LOGO
+   ========================================================= */
+
+.cd-secret-logo {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  outline: none;
+}
+
+.cd-secret-logo img {
+  display: block;
+
+  width: auto;
+  max-width: 100%;
+  height: auto;
+
+  border: 0;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.cd-secret-logo:hover img {
+  transform: translateY(-2px);
+
+  filter:
+    drop-shadow(
+      0 5px 10px rgba(73, 42, 67, 0.18)
+    );
+}
+
+.cd-secret-logo:focus-visible {
+  outline: 2px solid rgba(103, 67, 93, 0.5);
+  outline-offset: 5px;
+  border-radius: 4px;
+}
+
+
+/* Tiny secret moon */
+
+.cd-secret-logo::after {
+  content: "☾";
+
+  position: absolute;
+
+  right: -18px;
+  top: -12px;
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+
+  color: #68465f;
+
+  opacity: 0;
+
+  transform:
+    translateY(4px)
+    rotate(-15deg);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  pointer-events: none;
+}
+
+.cd-secret-logo:hover::after {
+  opacity: 0.75;
+
+  transform:
+    translateY(0)
+    rotate(0deg);
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+#cdGameOverlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999999;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(104, 70, 94, 0.20),
+      transparent 35%
+    ),
+    rgba(31, 25, 31, 0.88);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  overflow-y: auto;
+}
+
+#cdGameOverlay.cd-game-open {
+  display: flex;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.cd-game-card {
+
+  position: relative;
+
+  width: min(760px, 100%);
+
+  max-height: calc(100vh - 48px);
+
+  overflow-y: auto;
+
+  padding: 34px;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(123, 80, 108, 0.08),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #fffdf8,
+      #f8f0e9
+    );
+
+  border:
+    1px solid rgba(94, 61, 83, 0.18);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 30px 80px rgba(20, 14, 20, 0.45),
+    0 8px 25px rgba(50, 30, 50, 0.18);
+
+  color: #302630;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+
+/* =========================================================
+   MOON
+   ========================================================= */
+
+.cd-game-moon {
+
+  position: absolute;
+
+  top: 24px;
+  right: 30px;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: #eadbc8;
+
+  box-shadow:
+    inset -7px -3px 0 rgba(103, 67, 93, 0.12),
+    0 4px 15px rgba(103, 67, 93, 0.12);
+
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.cd-game-close {
+
+  position: absolute;
+
+  top: 18px;
+  left: 20px;
+
+  width: 38px;
+  height: 38px;
+
+  border:
+    1px solid rgba(90, 59, 79, 0.18);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 253, 248, 0.8);
+
+  color: #60405a;
+
+  font-size: 22px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cd-game-close:hover {
+
+  background: #eee2da;
+
+  transform: rotate(8deg);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.cd-game-header {
+
+  text-align: center;
+
+  padding:
+    5px
+    55px
+    22px;
+}
+
+.cd-game-eyebrow {
+
+  margin-bottom: 8px;
+
+  color: #85617c;
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.cd-game-title {
+
+  margin: 0;
+
+  color: #4c3047;
+
+  font-size:
+    clamp(27px, 5vw, 42px);
+
+  font-weight: normal;
+
+  line-height: 1.05;
+}
+
+.cd-game-subtitle {
+
+  max-width: 540px;
+
+  margin:
+    12px
+    auto
+    0;
+
+  color: #6d5968;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.cd-game-info {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+.cd-game-stat {
+
+  padding: 11px 8px;
+
+  text-align: center;
+
+  background:
+    rgba(255,255,255,0.48);
+
+  border:
+    1px solid rgba(104,70,94,0.12);
+
+  border-radius: 10px;
+}
+
+.cd-game-stat-label {
+
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #8b7184;
+
+  font-size: 10px;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.cd-game-stat-value {
+
+  color: #53374e;
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   WORD LIST
+   ========================================================= */
+
+.cd-word-list {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin:
+    0
+    auto
+    18px;
+}
+
+.cd-word {
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(104,70,94,0.18);
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,0.55);
+
+  color: #654b60;
+
+  font-size: 11px;
+
+  letter-spacing: 0.08em;
+
+  transition: all 0.25s ease;
+}
+
+.cd-word.found {
+
+  background: #72516b;
+
+  border-color: #72516b;
+
+  color: #fffaf5;
+
+  text-decoration: line-through;
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   WORD BOARD
+   ========================================================= */
+
+.cd-board-wrap {
+
+  display: flex;
+
+  justify-content: center;
+
+  padding: 15px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(122,82,106,0.07),
+      transparent 60%
+    );
+
+  border-radius: 14px;
+}
+
+#cdWordBoard {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(10, 1fr);
+
+  width:
+    min(540px, 100%);
+
+  aspect-ratio: 1 / 1;
+
+  gap: 3px;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  touch-action: none;
+}
+
+.cd-letter {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 0;
+
+  border:
+    1px solid rgba(104,70,94,0.12);
+
+  border-radius: 5px;
+
+  background:
+    rgba(255,255,255,0.68);
+
+  color: #513a4d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(12px, 2.8vw, 20px);
+
+  cursor: pointer;
+
+  transition:
+    background 0.12s ease,
+    color 0.12s ease,
+    transform 0.12s ease;
+}
+
+.cd-letter:hover {
+
+  background: #f0e3dc;
+}
+
+.cd-letter.selected {
+
+  background: #b99caf;
+
+  color: #fffdf8;
+
+  transform: scale(1.04);
+}
+
+.cd-letter.found {
+
+  background: #6e4b66;
+
+  color: #fffaf5;
+}
+
+
+/* =========================================================
+   INSTRUCTIONS
+   ========================================================= */
+
+.cd-game-instructions {
+
+  margin:
+    15px
+    0;
+
+  text-align: center;
+
+  color: #806b79;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.cd-game-actions {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.cd-game-button {
+
+  border:
+    1px solid rgba(91,58,80,0.25);
+
+  border-radius: 24px;
+
+  padding:
+    10px
+    18px;
+
+  background: #6c4a64;
+
+  color: #fffaf6;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cd-game-button:hover {
+
+  background: #57394f;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 15px
+    rgba(80,48,70,0.18);
+}
+
+.cd-game-button.secondary {
+
+  background: transparent;
+
+  color: #63475c;
+}
+
+.cd-game-button.secondary:hover {
+
+  background: #eee3dc;
+}
+
+
+/* =========================================================
+   WIN MESSAGE
+   ========================================================= */
+
+.cd-win-message {
+
+  display: none;
+
+  margin-top: 18px;
+
+  padding:
+    15px
+    18px;
+
+  text-align: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(111,78,103,0.09);
+
+  border:
+    1px solid rgba(111,78,103,0.14);
+
+  color: #5b4055;
+}
+
+.cd-win-message.show {
+
+  display: block;
+}
+
+.cd-win-title {
+
+  margin-bottom: 5px;
+
+  font-size: 20px;
+}
+
+.cd-win-text {
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   PRIZE WHEEL SCREEN
+   ========================================================= */
+
+#cdPrizeScreen {
+
+  display: none;
+
+  text-align: center;
+
+  animation:
+    cdFadeIn 0.5s ease;
+}
+
+#cdPrizeScreen.show {
+
+  display: block;
+}
+
+.cd-prize-eyebrow {
+
+  color: #85617c;
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 8px;
+}
+
+.cd-prize-title {
+
+  margin: 0;
+
+  color: #4c3047;
+
+  font-size:
+    clamp(28px, 5vw, 40px);
+
+  font-weight: normal;
+}
+
+.cd-prize-subtitle {
+
+  max-width: 500px;
+
+  margin:
+    10px
+    auto
+    20px;
+
+  color: #6d5968;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   WHEEL
+   ========================================================= */
+
+.cd-wheel-area {
+
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin:
+    15px
+    auto
+    20px;
+
+  width:
+    min(390px, 90vw);
+
+  height:
+    min(390px, 90vw);
+}
+
+
+/* Pointer */
+
+.cd-wheel-pointer {
+
+  position: absolute;
+
+  z-index: 5;
+
+  top: -3px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  width: 0;
+  height: 0;
+
+  border-left:
+    16px solid transparent;
+
+  border-right:
+    16px solid transparent;
+
+  border-top:
+    0;
+
+  border-bottom:
+    31px solid #4f354b;
+
+  filter:
+    drop-shadow(
+      0 3px 3px
+      rgba(0,0,0,0.2)
+    );
+}
+
+
+/* Wheel */
+
+#cdPrizeWheel {
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #76536e 0deg 45deg,
+      #eadbc8 45deg 90deg,
+      #a9819b 90deg 135deg,
+      #f3e8dc 135deg 180deg,
+      #67455f 180deg 225deg,
+      #ddc4d0 225deg 270deg,
+      #87637e 270deg 315deg,
+      #f1dfd2 315deg 360deg
+    );
+
+  border:
+    9px solid #fffaf4;
+
+  box-shadow:
+    0 8px 25px
+    rgba(60,38,55,0.22),
+    0 0 0 1px
+    rgba(93,62,82,0.2);
+
+  transition:
+    transform 5s
+    cubic-bezier(
+      0.12,
+      0.65,
+      0.15,
+      1
+    );
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+/* Wheel text */
+
+.cd-wheel-label {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 44%;
+
+  transform-origin:
+    center center;
+
+  color: #fffaf6;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 12px;
+
+  line-height: 1.15;
+
+  text-align: center;
+
+  text-shadow:
+    0 1px 2px
+    rgba(40,25,40,0.35);
+
+  pointer-events: none;
+}
+
+.cd-wheel-label.light {
+
+  color: #563b50;
+
+  text-shadow: none;
+}
+
+
+/* Wheel centre */
+
+.cd-wheel-center {
+
+  position: absolute;
+
+  z-index: 4;
+
+  left: 50%;
+  top: 50%;
+
+  width: 62px;
+  height: 62px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border:
+    5px solid #fffaf4;
+
+  border-radius: 50%;
+
+  background: #68465f;
+
+  color: #fffaf5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-family: Georgia, serif;
+
+  font-size: 24px;
+
+  box-shadow:
+    0 4px 12px
+    rgba(50,30,50,0.25);
+}
+
+
+/* =========================================================
+   SPIN BUTTON
+   ========================================================= */
+
+#cdSpinWheel {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 180px;
+
+  padding:
+    13px
+    25px;
+
+  border: 0;
+
+  border-radius: 30px;
+
+  background:
+    #68465f;
+
+  color: #fffaf5;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 15px;
+
+  letter-spacing: 0.03em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px
+    rgba(80,48,70,0.22);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+#cdSpinWheel:hover {
+
+  background: #54394f;
+
+  transform:
+    translateY(-2px);
+}
+
+#cdSpinWheel:disabled {
+
+  opacity: 0.55;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   PRIZE RESULT
+   ========================================================= */
+
+#cdPrizeResult {
+
+  display: none;
+
+  margin-top: 22px;
+
+  padding:
+    22px
+    18px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(116,79,105,0.10),
+      rgba(235,218,200,0.35)
+    );
+
+  border:
+    1px solid
+    rgba(104,70,94,0.18);
+
+  animation:
+    cdPrizeReveal 0.7s ease;
+}
+
+#cdPrizeResult.show {
+
+  display: block;
+}
+
+.cd-result-small {
+
+  color: #806b79;
+
+  font-size: 11px;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.cd-result-prize {
+
+  margin:
+    7px
+    0;
+
+  color: #4c3047;
+
+  font-size:
+    clamp(23px, 5vw, 32px);
+}
+
+.cd-result-code {
+
+  display: inline-block;
+
+  margin-top: 6px;
+
+  padding:
+    8px
+    13px;
+
+  border:
+    1px dashed
+    rgba(104,70,94,0.35);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255,255,255,0.65);
+
+  color: #57394f;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.08em;
+}
+
+.cd-result-note {
+
+  max-width: 450px;
+
+  margin:
+    12px
+    auto
+    0;
+
+  color: #725f6e;
+
+  font-size: 12px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   DECORATION
+   ========================================================= */
+
+.cd-game-botanical {
+
+  position: absolute;
+
+  bottom: 16px;
+  left: 18px;
+
+  color: #876879;
+
+  font-size: 23px;
+
+  opacity: 0.45;
+
+  transform: rotate(-15deg);
+
+  pointer-events: none;
+}
+
+.cd-game-botanical.right {
+
+  left: auto;
+
+  right: 20px;
+
+  transform:
+    rotate(15deg)
+    scaleX(-1);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes cdFadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+@keyframes cdPrizeReveal {
+
+  0% {
+    opacity: 0;
+    transform:
+      scale(0.85)
+      translateY(10px);
+  }
+
+  70% {
+    transform:
+      scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      scale(1)
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  #cdGameOverlay {
+    padding: 12px;
+  }
+
+  .cd-game-card {
+
+    padding:
+      22px
+      14px
+      26px;
+
+    max-height:
+      calc(100vh - 24px);
+
+    border-radius: 14px;
+  }
+
+  .cd-game-header {
+
+    padding:
+      12px
+      42px
+      18px;
+  }
+
+  .cd-game-title {
+    font-size: 29px;
+  }
+
+  .cd-game-subtitle {
+    font-size: 12px;
+  }
+
+  .cd-game-moon {
+
+    width: 35px;
+    height: 35px;
+
+    top: 18px;
+    right: 18px;
+  }
+
+  .cd-game-close {
+
+    top: 12px;
+    left: 12px;
+
+    width: 34px;
+    height: 34px;
+  }
+
+  .cd-board-wrap {
+    padding: 6px;
+  }
+
+  #cdWordBoard {
+    gap: 2px;
+  }
+
+  .cd-letter {
+    border-radius: 3px;
+  }
+
+  .cd-game-info {
+    gap: 5px;
+  }
+
+  .cd-game-stat {
+    padding: 8px 4px;
+  }
+
+  .cd-game-stat-value {
+    font-size: 15px;
+  }
+
+  .cd-wheel-area {
+
+    width: 290px;
+    height: 290px;
+  }
+
+  .cd-wheel-label {
+    font-size: 9px;
+  }
+
+  .cd-wheel-center {
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 19px;
+  }
+
+  .cd-secret-logo::after {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cd-secret-logo img,
+  .cd-secret-logo::after,
+  .cd-letter,
+  .cd-game-button,
+  .cd-game-close,
+  #cdPrizeWheel {
+
+    transition: none;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  #cdGameOverlay {
+    display: none !important;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     COLLECTIVE DESIGNS LOGO
+     THIS IS THE SECRET BUTTON
+     ========================================================= -->
+
+<div style="text-align:center;">
+
+  <button
+    type="button"
+    id="collectiveDesignsSecret"
+    class="cd-secret-logo"
+    aria-label="Collective Designs"
+    title="Collective Designs"
+  >
+
+    <img
+      src="assets/cd logo.png"
+      alt="Collective Designs"
+    >
+
+  </button>
+
+</div>
+
+
+<!-- =========================================================
+     GAME OVERLAY
+     ========================================================= -->
+
+<div
+  id="cdGameOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cdGameTitle"
+>
+
+  <div class="cd-game-card">
+
+    <div class="cd-game-moon"></div>
+
+
+    <!-- CLOSE -->
+
+    <button
+      type="button"
+      id="cdGameClose"
+      class="cd-game-close"
+      aria-label="Close game"
+    >
+      ×
+    </button>
+
+
+    <!-- =====================================================
+         WORD SEARCH
+         ===================================================== -->
+
+    <div id="cdWordSearchScreen">
+
+      <div class="cd-game-header">
+
+        <div class="cd-game-eyebrow">
+          Collective Designs · Secret Garden
+        </div>
+
+        <h2
+          id="cdGameTitle"
+          class="cd-game-title"
+        >
+          The Midnight Word Search
+        </h2>
+
+        <p class="cd-game-subtitle">
+
+          A little secret hidden beneath the moonlight.
+          Find the words sleeping among the flowers,
+          wings and shadows.
+
+        </p>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <div class="cd-game-info">
+
+        <div class="cd-game-stat">
+
+          <span class="cd-game-stat-label">
+            Time
+          </span>
+
+          <span
+            id="cdGameTimer"
+            class="cd-game-stat-value"
+          >
+            00:00
+          </span>
+
+        </div>
+
+
+        <div class="cd-game-stat">
+
+          <span class="cd-game-stat-label">
+            Found
+          </span>
+
+          <span
+            id="cdGameFound"
+            class="cd-game-stat-value"
+          >
+            0 / 7
+          </span>
+
+        </div>
+
+
+        <div class="cd-game-stat">
+
+          <span class="cd-game-stat-label">
+            Moon
+          </span>
+
+          <span
+            id="cdGameMoonPhase"
+            class="cd-game-stat-value"
+          >
+            ☾
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- WORDS -->
+
+      <div
+        id="cdWordList"
+        class="cd-word-list"
+      ></div>
+
+
+      <!-- BOARD -->
+
+      <div class="cd-board-wrap">
+
+        <div
+          id="cdWordBoard"
+          aria-label="Word search board"
+        ></div>
+
+      </div>
+
+
+      <div class="cd-game-instructions">
+
+        Drag across letters to find each hidden word.
+        Words may run horizontally, vertically or diagonally.
+
+      </div>
+
+
+      <div class="cd-game-actions">
+
+        <button
+          type="button"
+          id="cdNewGame"
+          class="cd-game-button"
+        >
+          New Moon
+        </button>
+
+        <button
+          type="button"
+          id="cdCloseGame"
+          class="cd-game-button secondary"
+        >
+          Return to Garden
+        </button>
+
+      </div>
+
+
+      <div
+        id="cdWinMessage"
+        class="cd-win-message"
+      >
+
+        <div class="cd-win-title">
+          ✦ You found the hidden garden ✦
+        </div>
+
+        <div class="cd-win-text">
+          Every little secret has been uncovered.
+          The moon is pleased.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PRIZE WHEEL
+         ===================================================== -->
+
+    <div id="cdPrizeScreen">
+
+      <div class="cd-prize-eyebrow">
+        A Secret Garden Reward
+      </div>
+
+      <h2 class="cd-prize-title">
+        You found them all ✦
+      </h2>
+
+      <p class="cd-prize-subtitle">
+
+        You've unlocked the Collective Designs
+        prize wheel. Give it a spin and see what
+        little treat the garden has waiting for you.
+
+      </p>
+
+
+      <!-- WHEEL -->
+
+      <div class="cd-wheel-area">
+
+        <div class="cd-wheel-pointer"></div>
+
+        <div id="cdPrizeWheel">
+
+          <!-- Labels are positioned by JavaScript -->
+
+        </div>
+
+        <div class="cd-wheel-center">
+          ✦
+        </div>
+
+      </div>
+
+
+      <!-- SPIN -->
+
+      <button
+        type="button"
+        id="cdSpinWheel"
+      >
+        ✦ Spin the Wheel ✦
+      </button>
+
+
+      <!-- RESULT -->
+
+      <div
+        id="cdPrizeResult"
+      >
+
+        <div class="cd-result-small">
+          Your secret reward
+        </div>
+
+        <div
+          id="cdPrizeName"
+          class="cd-result-prize"
+        ></div>
+
+        <div>
+          Your reward code:
+        </div>
+
+        <div
+          id="cdPrizeCode"
+          class="cd-result-code"
+        ></div>
+
+        <div class="cd-result-note">
+
+          Save this code and use it when ordering.
+          This reward is part of the Collective Designs
+          Secret Garden.
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="cd-game-actions"
+        style="margin-top:20px;"
+      >
+
+        <button
+          type="button"
+          id="cdPrizeClose"
+          class="cd-game-button secondary"
+        >
+          Return to Garden
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="cd-game-botanical">
+      ❧
+    </div>
+
+    <div class="cd-game-botanical right">
+      ❧
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   COLLECTIVE DESIGNS
+   SECRET GAME + PRIZE WHEEL
+   ========================================================= */
+
+(function () {
+
+  "use strict";
+
+
+  /* =======================================================
+     ELEMENTS
+     ======================================================= */
+
+  const logoButton =
+    document.getElementById(
+      "collectiveDesignsSecret"
+    );
+
+  const overlay =
+    document.getElementById(
+      "cdGameOverlay"
+    );
+
+  const closeButton =
+    document.getElementById(
+      "cdGameClose"
+    );
+
+  const closeGameButton =
+    document.getElementById(
+      "cdCloseGame"
+    );
+
+  const prizeCloseButton =
+    document.getElementById(
+      "cdPrizeClose"
+    );
+
+  const newGameButton =
+    document.getElementById(
+      "cdNewGame"
+    );
+
+  const board =
+    document.getElementById(
+      "cdWordBoard"
+    );
+
+  const wordList =
+    document.getElementById(
+      "cdWordList"
+    );
+
+  const timerDisplay =
+    document.getElementById(
+      "cdGameTimer"
+    );
+
+  const foundDisplay =
+    document.getElementById(
+      "cdGameFound"
+    );
+
+  const moonDisplay =
+    document.getElementById(
+      "cdGameMoonPhase"
+    );
+
+  const winMessage =
+    document.getElementById(
+      "cdWinMessage"
+    );
+
+  const wordSearchScreen =
+    document.getElementById(
+      "cdWordSearchScreen"
+    );
+
+  const prizeScreen =
+    document.getElementById(
+      "cdPrizeScreen"
+    );
+
+  const prizeWheel =
+    document.getElementById(
+      "cdPrizeWheel"
+    );
+
+  const spinButton =
+    document.getElementById(
+      "cdSpinWheel"
+    );
+
+  const prizeResult =
+    document.getElementById(
+      "cdPrizeResult"
+    );
+
+  const prizeName =
+    document.getElementById(
+      "cdPrizeName"
+    );
+
+  const prizeCode =
+    document.getElementById(
+      "cdPrizeCode"
+    );
+
+
+  /* =======================================================
+     WORD SEARCH SETTINGS
+     ======================================================= */
+
+  const GRID_SIZE = 10;
+
+  const WORDS = [
+    "MOTH",
+    "MOON",
+    "THORN",
+    "NIGHT",
+    "BLOOM",
+    "WING",
+    "GARDEN"
+  ];
+
+  const LETTERS =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+  const DIRECTIONS = [
+
+    { row: 0, col: 1 },
+    { row: 0, col: -1 },
+
+    { row: 1, col: 0 },
+    { row: -1, col: 0 },
+
+    { row: 1, col: 1 },
+    { row: -1, col: -1 },
+
+    { row: 1, col: -1 },
+    { row: -1, col: 1 }
+
+  ];
+
+
+  /* =======================================================
+     GAME VARIABLES
+     ======================================================= */
+
+  let grid = [];
+
+  let placements = {};
+
+  let foundWords = new Set();
+
+  let isSelecting = false;
+
+  let startCell = null;
+
+  let timer = null;
+
+  let seconds = 0;
+
+  let gameStarted = false;
+
+
+  /* =======================================================
+     PRIZE WHEEL
+     ======================================================= */
+
+  const PRIZES = [
+
+    {
+      name: "Buy 1, Get 1 Free",
+      code: "GARDEN-BOGO"
+    },
+
+    {
+      name: "10% Off",
+      code: "MOON-10"
+    },
+
+    {
+      name: "30% Off",
+      code: "MOTH-30"
+    },
+
+    {
+      name: "50% Off",
+      code: "NIGHT-50"
+    },
+
+    {
+      name: "60% Off",
+      code: "GARDEN-60"
+    },
+
+    {
+      name: "Free Design of Your Choice",
+      code: "WING-FREE"
+    },
+
+    {
+      name: "20% Off",
+      code: "BLOOM-20"
+    },
+
+    {
+      name: "15% Off",
+      code: "MOONLIGHT-15"
+    }
+
+  ];
+
+
+  let wheelRotation = 0;
+
+  let wheelSpinning = false;
+
+  let winningPrize = null;
+
+
+  /* =======================================================
+     OPEN GAME
+     ======================================================= */
+
+  function openGame() {
+
+    overlay.classList.add(
+      "cd-game-open"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+    showWordSearch();
+
+    newGame();
+
+    setTimeout(function () {
+
+      closeButton.focus();
+
+    }, 50);
+
+  }
+
+
+  /* =======================================================
+     CLOSE
+     ======================================================= */
+
+  function closeGame() {
+
+    overlay.classList.remove(
+      "cd-game-open"
+    );
+
+    document.body.style.overflow =
+      "";
+
+    stopTimer();
+
+  }
+
+
+  logoButton.addEventListener(
+    "click",
+    openGame
+  );
+
+
+  closeButton.addEventListener(
+    "click",
+    closeGame
+  );
+
+
+  closeGameButton.addEventListener(
+    "click",
+    closeGame
+  );
+
+
+  prizeCloseButton.addEventListener(
+    "click",
+    closeGame
+  );
+
+
+  overlay.addEventListener(
+    "click",
+    function (event) {
+
+      if (
+        event.target === overlay
+      ) {
+
+        closeGame();
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        overlay.classList.contains(
+          "cd-game-open"
+        )
+      ) {
+
+        closeGame();
+
+      }
+
+    }
+  );
+
+
+  /* =======================================================
+     SHOW WORD SEARCH
+     ======================================================= */
+
+  function showWordSearch() {
+
+    wordSearchScreen.style.display =
+      "block";
+
+    prizeScreen.classList.remove(
+      "show"
+    );
+
+  }
+
+
+  /* =======================================================
+     NEW GAME
+     ======================================================= */
+
+  newGameButton.addEventListener(
+    "click",
+    newGame
+  );
+
+
+  function newGame() {
+
+    stopTimer();
+
+    seconds = 0;
+
+    foundWords = new Set();
+
+    placements = {};
+
+    grid =
+      createEmptyGrid();
+
+    placeAllWords();
+
+    fillEmptySpaces();
+
+    renderBoard();
+
+    renderWordList();
+
+    updateStats();
+
+    winMessage.classList.remove(
+      "show"
+    );
+
+    gameStarted = false;
+
+    updateMoon();
+
+  }
+
+
+  /* =======================================================
+     EMPTY GRID
+     ======================================================= */
+
+  function createEmptyGrid() {
+
+    const newGrid = [];
+
+    for (
+      let row = 0;
+      row < GRID_SIZE;
+      row++
+    ) {
+
+      newGrid[row] = [];
+
+      for (
+        let col = 0;
+        col < GRID_SIZE;
+        col++
+      ) {
+
+        newGrid[row][col] = "";
+
+      }
+
+    }
+
+    return newGrid;
+
+  }
+
+
+  /* =======================================================
+     PLACE WORDS
+     ======================================================= */
+
+  function placeAllWords() {
+
+    const shuffledWords =
+      [...WORDS].sort(
+        function () {
+          return Math.random() - 0.5;
+        }
+      );
+
+
+    shuffledWords.sort(
+      function (a, b) {
+        return b.length - a.length;
+      }
+    );
+
+
+    shuffledWords.forEach(
+      function (word) {
+
+        let placed = false;
+
+
+        for (
+          let attempt = 0;
+          attempt < 500 &&
+          !placed;
+          attempt++
+        ) {
+
+          const direction =
+            DIRECTIONS[
+              Math.floor(
+                Math.random() *
+                DIRECTIONS.length
+              )
+            ];
+
+
+          const startRow =
+            Math.floor(
+              Math.random() *
+              GRID_SIZE
+            );
+
+
+          const startCol =
+            Math.floor(
+              Math.random() *
+              GRID_SIZE
+            );
+
+
+          const endRow =
+            startRow +
+            direction.row *
+            (word.length - 1);
+
+
+          const endCol =
+            startCol +
+            direction.col *
+            (word.length - 1);
+
+
+          if (
+            endRow < 0 ||
+            endRow >= GRID_SIZE ||
+            endCol < 0 ||
+            endCol >= GRID_SIZE
+          ) {
+
+            continue;
+
+          }
+
+
+          let valid = true;
+
+
+          for (
+            let i = 0;
+            i < word.length;
+            i++
+          ) {
+
+            const row =
+              startRow +
+              direction.row * i;
+
+
+            const col =
+              startCol +
+              direction.col * i;
+
+
+            const existing =
+              grid[row][col];
+
+
+            if (
+              existing &&
+              existing !== word[i]
+            ) {
+
+              valid = false;
+
+              break;
+
+            }
+
+          }
+
+
+          if (!valid) {
+            continue;
+          }
+
+
+          const cells = [];
+
+
+          for (
+            let i = 0;
+            i < word.length;
+            i++
+          ) {
+
+            const row =
+              startRow +
+              direction.row * i;
+
+
+            const col =
+              startCol +
+              direction.col * i;
+
+
+            grid[row][col] =
+              word[i];
+
+
+            cells.push({
+              row: row,
+              col: col
+            });
+
+          }
+
+
+          placements[word] =
+            cells;
+
+          placed = true;
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     FILL GRID
+     ======================================================= */
+
+  function fillEmptySpaces() {
+
+    for (
+      let row = 0;
+      row < GRID_SIZE;
+      row++
+    ) {
+
+      for (
+        let col = 0;
+        col < GRID_SIZE;
+        col++
+      ) {
+
+        if (!grid[row][col]) {
+
+          grid[row][col] =
+            LETTERS[
+              Math.floor(
+                Math.random() *
+                LETTERS.length
+              )
+            ];
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+  /* =======================================================
+     RENDER BOARD
+     ======================================================= */
+
+  function renderBoard() {
+
+    board.innerHTML = "";
+
+
+    for (
+      let row = 0;
+      row < GRID_SIZE;
+      row++
+    ) {
+
+      for (
+        let col = 0;
+        col < GRID_SIZE;
+        col++
+      ) {
+
+        const cell =
+          document.createElement(
+            "div"
+          );
+
+
+        cell.className =
+          "cd-letter";
+
+
+        cell.textContent =
+          grid[row][col];
+
+
+        cell.dataset.row =
+          row;
+
+        cell.dataset.col =
+          col;
+
+
+        board.appendChild(cell);
+
+      }
+
+    }
+
+  }
+
+
+  /* =======================================================
+     WORD LIST
+     ======================================================= */
+
+  function renderWordList() {
+
+    wordList.innerHTML = "";
+
+
+    WORDS.forEach(
+      function (word) {
+
+        const item =
+          document.createElement(
+            "span"
+          );
+
+
+        item.className =
+          "cd-word";
+
+
+        item.dataset.word =
+          word;
+
+
+        item.textContent =
+          word;
+
+
+        wordList.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     GET CELL
+     ======================================================= */
+
+  function getCell(row, col) {
+
+    return board.querySelector(
+      '.cd-letter[data-row="' +
+      row +
+      '"][data-col="' +
+      col +
+      '"]'
+    );
+
+  }
+
+
+  /* =======================================================
+     LINE CELLS
+     ======================================================= */
+
+  function getLineCells(
+    start,
+    end
+  ) {
+
+    const rowDiff =
+      end.row -
+      start.row;
+
+
+    const colDiff =
+      end.col -
+      start.col;
+
+
+    const rowStep =
+      rowDiff === 0
+        ? 0
+        : rowDiff /
+          Math.abs(rowDiff);
+
+
+    const colStep =
+      colDiff === 0
+        ? 0
+        : colDiff /
+          Math.abs(colDiff);
+
+
+    if (
+      rowDiff !== 0 &&
+      colDiff !== 0 &&
+      Math.abs(rowDiff) !==
+      Math.abs(colDiff)
+    ) {
+
+      return [];
+
+    }
+
+
+    const length =
+      Math.max(
+        Math.abs(rowDiff),
+        Math.abs(colDiff)
+      ) + 1;
+
+
+    const cells = [];
+
+
+    for (
+      let i = 0;
+      i < length;
+      i++
+    ) {
+
+      cells.push({
+
+        row:
+          start.row +
+          rowStep * i,
+
+        col:
+          start.col +
+          colStep * i
+
+      });
+
+    }
+
+
+    return cells;
+
+  }
+
+
+  /* =======================================================
+     CLEAR SELECTION
+     ======================================================= */
+
+  function clearSelection() {
+
+    board
+      .querySelectorAll(
+        ".cd-letter.selected"
+      )
+      .forEach(
+        function (cell) {
+
+          cell.classList.remove(
+            "selected"
+          );
+
+        }
+      );
+
+  }
+
+
+  /* =======================================================
+     SHOW SELECTION
+     ======================================================= */
+
+  function showSelection(cells) {
+
+    clearSelection();
+
+
+    cells.forEach(
+      function (position) {
+
+        const cell =
+          getCell(
+            position.row,
+            position.col
+          );
+
+
+        if (cell) {
+
+          cell.classList.add(
+            "selected"
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     START DRAG
+     ======================================================= */
+
+  function beginSelection(event) {
+
+    const cell =
+      event.target.closest(
+        ".cd-letter"
+      );
+
+
+    if (!cell) {
+      return;
+    }
+
+
+    if (!gameStarted) {
+
+      startTimer();
+
+      gameStarted = true;
+
+    }
+
+
+    isSelecting = true;
+
+
+    startCell = {
+
+      row:
+        Number(
+          cell.dataset.row
+        ),
+
+      col:
+        Number(
+          cell.dataset.col
+        )
+
+    };
+
+
+    showSelection([
+      startCell
+    ]);
+
+
+    event.preventDefault();
+
+  }
+
+
+  /* =======================================================
+     DRAG
+     ======================================================= */
+
+  function moveSelection(event) {
+
+    if (
+      !isSelecting ||
+      !startCell
+    ) {
+
+      return;
+
+    }
+
+
+    const target =
+      document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      );
+
+
+    if (!target) {
+      return;
+    }
+
+
+    const cell =
+      target.closest(
+        ".cd-letter"
+      );
+
+
+    if (
+      !cell ||
+      !board.contains(cell)
+    ) {
+
+      return;
+
+    }
+
+
+    const current = {
+
+      row:
+        Number(
+          cell.dataset.row
+        ),
+
+      col:
+        Number(
+          cell.dataset.col
+        )
+
+    };
+
+
+    const selectedCells =
+      getLineCells(
+        startCell,
+        current
+      );
+
+
+    if (
+      selectedCells.length
+    ) {
+
+      showSelection(
+        selectedCells
+      );
+
+    }
+
+
+    event.preventDefault();
+
+  }
+
+
+  /* =======================================================
+     END DRAG
+     ======================================================= */
+
+  function endSelection(event) {
+
+    if (
+      !isSelecting ||
+      !startCell
+    ) {
+
+      return;
+
+    }
+
+
+    isSelecting = false;
+
+
+    let endCell = null;
+
+
+    if (
+      event &&
+      event.target &&
+      event.target.closest
+    ) {
+
+      const cell =
+        event.target.closest(
+          ".cd-letter"
+        );
+
+
+      if (
+        cell &&
+        board.contains(cell)
+      ) {
+
+        endCell = {
+
+          row:
+            Number(
+              cell.dataset.row
+            ),
+
+          col:
+            Number(
+              cell.dataset.col
+            )
+
+        };
+
+      }
+
+    }
+
+
+    if (!endCell) {
+
+      const selected =
+        board.querySelectorAll(
+          ".cd-letter.selected"
+        );
+
+
+      if (selected.length) {
+
+        const last =
+          selected[
+            selected.length - 1
+          ];
+
+
+        endCell = {
+
+          row:
+            Number(
+              last.dataset.row
+            ),
+
+          col:
+            Number(
+              last.dataset.col
+            )
+
+        };
+
+      }
+
+    }
+
+
+    if (endCell) {
+
+      const cells =
+        getLineCells(
+          startCell,
+          endCell
+        );
+
+
+      checkSelection(cells);
+
+    }
+
+
+    clearSelection();
+
+    startCell = null;
+
+  }
+
+
+  /* =======================================================
+     CHECK WORD
+     ======================================================= */
+
+  function checkSelection(
+    cells
+  ) {
+
+    if (!cells.length) {
+      return;
+    }
+
+
+    const selectedWord =
+      cells
+        .map(
+          function (position) {
+
+            return grid[
+              position.row
+            ][
+              position.col
+            ];
+
+          }
+        )
+        .join("");
+
+
+    const reversedWord =
+      selectedWord
+        .split("")
+        .reverse()
+        .join("");
+
+
+    let matchedWord = null;
+
+
+    WORDS.forEach(
+      function (word) {
+
+        if (
+          !foundWords.has(word) &&
+          (
+            selectedWord === word ||
+            reversedWord === word
+          )
+        ) {
+
+          matchedWord =
+            word;
+
+        }
+
+      }
+    );
+
+
+    if (!matchedWord) {
+      return;
+    }
+
+
+    foundWords.add(
+      matchedWord
+    );
+
+
+    cells.forEach(
+      function (position) {
+
+        const cell =
+          getCell(
+            position.row,
+            position.col
+          );
+
+
+        if (cell) {
+
+          cell.classList.add(
+            "found"
+          );
+
+        }
+
+      }
+    );
+
+
+    const wordElement =
+      wordList.querySelector(
+        '[data-word="' +
+        matchedWord +
+        '"]'
+      );
+
+
+    if (wordElement) {
+
+      wordElement.classList.add(
+        "found"
+      );
+
+    }
+
+
+    updateStats();
+
+
+    if (
+      foundWords.size ===
+      WORDS.length
+    ) {
+
+      finishGame();
+
+    }
+
+  }
+
+
+  /* =======================================================
+     TIMER
+     ======================================================= */
+
+  function startTimer() {
+
+    stopTimer();
+
+
+    timer =
+      setInterval(
+        function () {
+
+          seconds++;
+
+          timerDisplay.textContent =
+            formatTime(
+              seconds
+            );
+
+        },
+        1000
+      );
+
+  }
+
+
+  function stopTimer() {
+
+    if (timer) {
+
+      clearInterval(timer);
+
+      timer = null;
+
+    }
+
+  }
+
+
+  function formatTime(
+    totalSeconds
+  ) {
+
+    const minutes =
+      Math.floor(
+        totalSeconds / 60
+      );
+
+
+    const remaining =
+      totalSeconds % 60;
+
+
+    return (
+      String(minutes)
+        .padStart(2, "0") +
+      ":" +
+      String(remaining)
+        .padStart(2, "0")
+    );
+
+  }
+
+
+  /* =======================================================
+     STATS
+     ======================================================= */
+
+  function updateStats() {
+
+    foundDisplay.textContent =
+      foundWords.size +
+      " / " +
+      WORDS.length;
+
+  }
+
+
+  /* =======================================================
+     MOON
+     ======================================================= */
+
+  function updateMoon() {
+
+    const moons = [
+      "☾",
+      "☽",
+      "◐",
+      "◑",
+      "●"
+    ];
+
+
+    moonDisplay.textContent =
+      moons[
+        Math.floor(
+          Math.random() *
+          moons.length
+        )
+      ];
+
+  }
+
+
+  /* =======================================================
+     GAME COMPLETE
+     ======================================================= */
+
+  function finishGame() {
+
+    stopTimer();
+
+    winMessage.classList.add(
+      "show"
+    );
+
+
+    updateMoon();
+
+
+    /*
+     * Give the player a moment to enjoy
+     * the win message before revealing
+     * the prize wheel.
+     */
+
+    setTimeout(
+      function () {
+
+        showPrizeWheel();
+
+      },
+      1800
+    );
+
+  }
+
+
+  /* =======================================================
+     SHOW PRIZE WHEEL
+     ======================================================= */
+
+  function showPrizeWheel() {
+
+    wordSearchScreen.style.display =
+      "none";
+
+
+    prizeScreen.classList.add(
+      "show"
+    );
+
+
+    createWheelLabels();
+
+
+    prizeResult.classList.remove(
+      "show"
+    );
+
+
+    spinButton.disabled =
+      false;
+
+
+    spinButton.textContent =
+      "✦ Spin the Wheel ✦";
+
+
+    winningPrize = null;
+
+  }
+
+
+  /* =======================================================
+     CREATE WHEEL LABELS
+     ======================================================= */
+
+  function createWheelLabels() {
+
+    /*
+     * Remove old labels.
+     */
+
+    prizeWheel
+      .querySelectorAll(
+        ".cd-wheel-label"
+      )
+      .forEach(
+        function (label) {
+
+          label.remove();
+
+        }
+      );
+
+
+    const segmentAngle =
+      360 / PRIZES.length;
+
+
+    PRIZES.forEach(
+      function (prize, index) {
+
+        const label =
+          document.createElement(
+            "div"
+          );
+
+
+        label.className =
+          "cd-wheel-label";
+
+
+        /*
+         * Every second segment has a
+         * lighter background.
+         */
+
+        if (
+          index === 1 ||
+          index === 3 ||
+          index === 5 ||
+          index === 7
+        ) {
+
+          label.classList.add(
+            "light"
+          );
+
+        }
+
+
+        label.innerHTML =
+          prize.name
+            .replace(
+              " ",
+              " "
+            );
+
+
+        /*
+         * Position text around the wheel.
+         */
+
+        const angle =
+          (
+            index *
+            segmentAngle
+          ) +
+          (
+            segmentAngle / 2
+          );
+
+
+        label.style.transform =
+          "translate(-50%, -50%) " +
+          "rotate(" +
+          angle +
+          "deg) " +
+          "translateY(-105px) " +
+          "rotate(-" +
+          angle +
+          "deg)";
+
+
+        prizeWheel.appendChild(
+          label
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     GENERATE REWARD CODE
+     ======================================================= */
+
+  function generateRewardCode(
+    baseCode
+  ) {
+
+    const random =
+      Math.random()
+        .toString(36)
+        .substring(2, 7)
+        .toUpperCase();
+
+
+    return (
+      baseCode +
+      "-" +
+      random
+    );
+
+  }
+
+
+  /* =======================================================
+     SPIN WHEEL
+     ======================================================= */
+
+  spinButton.addEventListener(
+    "click",
+    spinWheel
+  );
+
+
+  function spinWheel() {
+
+    if (wheelSpinning) {
+      return;
+    }
+
+
+    wheelSpinning = true;
+
+    spinButton.disabled =
+      true;
+
+
+    prizeResult.classList.remove(
+      "show"
+    );
+
+
+    /*
+     * Pick a prize.
+     *
+     * Every prize currently has
+     * an equal chance of winning.
+     */
+
+    const winningIndex =
+      Math.floor(
+        Math.random() *
+        PRIZES.length
+      );
+
+
+    winningPrize =
+      PRIZES[winningIndex];
+
+
+    /*
+     * Calculate the rotation required
+     * to place the winning segment
+     * underneath the pointer.
+     */
+
+    const segmentAngle =
+      360 /
+      PRIZES.length;
+
+
+    const segmentCenter =
+      (
+        winningIndex *
+        segmentAngle
+      ) +
+      (
+        segmentAngle / 2
+      );
+
+
+    const targetAngle =
+      360 -
+      segmentCenter;
+
+
+    /*
+     * Several complete spins for
+     * a satisfying animation.
+     */
+
+    const extraSpins =
+      6 * 360;
+
+
+    wheelRotation +=
+      extraSpins +
+      targetAngle;
+
+
+    prizeWheel.style.transform =
+      "rotate(" +
+      wheelRotation +
+      "deg)";
+
+
+    setTimeout(
+      function () {
+
+        wheelSpinning =
+          false;
+
+
+        revealPrize();
+
+      },
+      5200
+    );
+
+  }
+
+
+  /* =======================================================
+     REVEAL PRIZE
+     ======================================================= */
+
+  function revealPrize() {
+
+    const code =
+      generateRewardCode(
+        winningPrize.code
+      );
+
+
+    prizeName.textContent =
+      winningPrize.name;
+
+
+    prizeCode.textContent =
+      code;
+
+
+    prizeResult.classList.add(
+      "show"
+    );
+
+
+    spinButton.textContent =
+      "✦ Reward Unlocked ✦";
+
+  }
+
+
+  /* =======================================================
+     POINTER EVENTS
+     ======================================================= */
+
+  board.addEventListener(
+    "pointerdown",
+    beginSelection
+  );
+
+
+  board.addEventListener(
+    "pointermove",
+    moveSelection
+  );
+
+
+  document.addEventListener(
+    "pointerup",
+    endSelection
+  );
+
+
+  board.addEventListener(
+    "dragstart",
+    function (event) {
+
+      event.preventDefault();
+
+    }
+  );
+
+
+  /* =======================================================
+     INITIALISE
+     ======================================================= */
+
+  newGame();
+
+})();
+
+</script>
 </body>
 </html>
