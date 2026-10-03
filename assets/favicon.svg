@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="The Collective Designs favicon">
+  <rect width="256" height="256" rx="28" fill="#09090c"/>
+  <circle cx="128" cy="128" r="88" fill="none" stroke="#d9a7af" stroke-width="12"/>
+  <path d="M115 58c-38 6-68 38-68 79 0 43 35 78 78 78 18 0 35-6 49-18-18 3-35-1-50-13-25-20-35-54-25-84 5-15 16-28 31-38-8 0-15 1-15 1zm41 10c17 13 29 34 29 58 0 34-23 62-57 70 22 7 46 2 64-13 25-20 37-56 27-88-8-25-31-43-63-27z" fill="#d9a7af"/>
+  <path d="M170 76l11 28 28 11-28 11-11 28-11-28-28-11 28-11 11-28z" fill="#f5e9e0"/>
+</svg>

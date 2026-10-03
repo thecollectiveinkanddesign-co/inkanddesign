@@ -4,11 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="The Collective Designs — gothic celestial art, tattoo flash, apparel, stationery and visual design.">
+  <meta name="theme-color" content="#09090c">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Collective Designs — Dark Little Worlds">
+  <meta property="og:description" content="Illustration, tattoo flash, apparel, stationery and strange beautiful things in a gothic celestial universe.">
+  <meta property="og:url" content="https://thecollectivedesigns.co.za/">
+  <meta property="og:image" content="https://thecollectivedesigns.co.za/assets/social-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Collective Designs — Dark Little Worlds">
+  <meta name="twitter:description" content="Art for people who notice the strange and beautiful.">
+  <link rel="canonical" href="https://thecollectivedesigns.co.za/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
   <title>The Collective Designs — Dark Little Worlds</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="shop-preview.css">
 </head>
 <body>
   <div class="grain"></div>
@@ -18,7 +33,7 @@
       <span class="brand-moon">☾</span>
       <span class="brand-text"><small>THE</small> COLLECTIVE <em>DESIGNS</em></span>
     </a>
-    <button class="menu-toggle" aria-label="Open menu">☰</button>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
     <nav class="nav">
       <a href="#work">Work</a>
       <a href="#flash">Tattoo Flash</a>
@@ -125,7 +140,7 @@
 
       <div class="product-grid">
         <article class="product">
-          <div class="product-art shirt">
+          <div class="product-art shirt" role="button" tabindex="0" aria-label="Preview Midnight Dragon Tee">
             <div class="shirt-shape">
               <span class="mini-logo">☾<b> THE COLLECTIVE</b><small>DESIGNS</small></span>
               <span class="shirt-dragon">♆</span>
@@ -135,7 +150,7 @@
         </article>
 
         <article class="product">
-          <div class="product-art paper">
+          <div class="product-art paper" role="button" tabindex="0" aria-label="Preview Moonlit Notes">
             <div class="paper-stack">
               <span class="paper-moon">☾</span><b>THE<br>COLLECTIVE</b><small>DESIGNS</small>
               <i>moth / moon / flower</i>
@@ -145,14 +160,14 @@
         </article>
 
         <article class="product">
-          <div class="product-art poster">
+          <div class="product-art poster" role="button" tabindex="0" aria-label="Preview Hollow Art Print">
             <div class="poster-frame"><small>THE COLLECTIVE</small><strong>HOLLOW</strong><i>some things only bloom in the dark</i><span>☾ ✦ 🦋 ✦ ☽</span></div>
           </div>
           <div class="product-info"><span>PRINTS</span><h3>Hollow Art Print</h3><p>Gothic botanical · archival print</p><button data-product="Hollow Art Print">View piece</button></div>
         </article>
 
         <article class="product">
-          <div class="product-art sticker">
+          <div class="product-art sticker" role="button" tabindex="0" aria-label="Preview Night Garden Sticker Set">
             <div class="sticker-sheet">
               <span>☾</span><span>✦</span><span>🦋</span><span>❀</span><span>♆</span><span>✧</span>
               <b>THE COLLECTIVE<br><small>DESIGNS</small></b>
@@ -187,7 +202,7 @@
       <p class="kicker">05 · COMMISSIONS</p>
       <h2>Bring me your<br><i>strange idea.</i></h2>
       <p>Branding, illustration, apparel graphics, stationery, tattoo flash and custom artwork.</p>
-      <a class="button" href="mailto:hello@thecollectivedesigns.co.za">hello@thecollectivedesigns.co.za</a>
+      <a class="button" href="mailto:thecollective.inkanddesign@gmail.com">thecollective.inkanddesign@gmail.com</a>
     </section>
   </main>
 
@@ -197,11 +212,12 @@
     <a href="#top">Back to top ↑</a>
   </footer>
 
-  <div class="modal" id="modal" aria-hidden="true">
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-card">
       <button class="modal-close" aria-label="Close">×</button>
       <p class="kicker">THE COLLECTIVE</p>
       <h2 id="modal-title">Piece</h2>
+      <div class="modal-preview" id="modal-preview"></div>
       <p>This is a visual catalogue preview. Connect this button to your Shopify, Etsy, Stripe or custom checkout when you're ready.</p>
       <a class="button" href="#contact">Ask about this piece</a>
     </div>

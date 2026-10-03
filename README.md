@@ -8,6 +8,9 @@ A dark celestial/gothic portfolio + shop front-end for The Collective Designs.
 - `script.js` — navigation, product preview modal, year
 - `assets/collective-wallpaper.png` — supplied artwork used as the visual foundation
 
+## Website-ready setup
+This static site is ready to publish as a simple marketing/portfolio website. It includes site metadata, social preview tags, a manifest, and a sitemap for cleaner deployment and indexing.
+
 ## Publish with GitHub Pages
 1. Create a GitHub repository.
 2. Upload the contents of this folder to the repository root.
