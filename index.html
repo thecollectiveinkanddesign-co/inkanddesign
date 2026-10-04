@@ -24,6 +24,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="shop-preview.css">
+<style id="cd-sister-secret-style">
+.cd-sister-trigger{
+  appearance:none;border:0;background:transparent;padding:0;margin:0;
+  font:inherit;color:inherit;cursor:pointer;position:relative;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.cd-sister-trigger:hover{opacity:.72;transform:translateY(-1px)}
+.cd-sister-trigger:focus-visible{outline:1px solid rgba(210,165,184,.55);outline-offset:5px;border-radius:3px}
+.cd-sister-modal{position:fixed;inset:0;z-index:1000005;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(13,10,14,.72);backdrop-filter:blur(7px)}
+.cd-sister-modal.show{display:flex}
+.cd-sister-card{position:relative;width:min(520px,92vw);max-height:90vh;overflow:auto;padding:38px 34px 34px;background:#f4eee7;color:#241b22;border:1px solid rgba(95,62,84,.18);box-shadow:0 24px 70px rgba(0,0,0,.35);text-align:center}
+.cd-sister-close{position:absolute;right:12px;top:8px;border:0;background:transparent;color:#4e3547;font-size:28px;line-height:1;cursor:pointer}
+.cd-sister-card h2{margin:8px 0 12px;font-family:Georgia,serif;font-weight:400;font-size:clamp(28px,5vw,42px)}
+.cd-sister-prompt{max-width:390px;margin:0 auto 20px;line-height:1.65;font-size:14px}
+.cd-sister-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.cd-sister-form input{width:190px;padding:12px 14px;border:1px solid rgba(78,53,71,.3);background:#fffaf5;color:#241b22;font:inherit;letter-spacing:.22em;text-align:center}
+.cd-sister-error{min-height:20px;margin:8px 0;color:#8b5368;font-size:13px}
+.cd-sister-note{margin-top:20px;padding:24px 20px;border-top:1px solid rgba(78,53,71,.18);border-bottom:1px solid rgba(78,53,71,.18);font-family:Georgia,serif;line-height:1.75;font-size:16px;text-align:left}
+.cd-sister-note p{margin:0 0 12px}
+.cd-sister-note-title,.cd-sister-signoff{font-style:italic;color:#704c62}
+.cd-sister-signoff{text-align:right;margin-top:18px!important}
+@media(max-width:600px){.cd-sister-card{padding:34px 22px 26px}.cd-sister-form{flex-direction:column;align-items:center}.cd-sister-form input{width:min(220px,80vw)}.cd-sister-form .button{width:min(220px,80vw)}}
+</style>
 </head>
 <body>
   <div class="grain"></div>
@@ -62,7 +85,7 @@
 
     <section id="work" class="intro section">
       <div>
-        <p class="kicker">THE COLLECTION</p>
+        <button type="button" class="kicker cd-sister-trigger" id="cdSisterTrigger" aria-label="The Collection">THE COLLECTION</button>
         <h2>Made for the<br><i>beautifully strange.</i></h2>
       </div>
       <p>Every piece lives in the same universe: engraved linework, celestial skies, botanical forms, dragons, moths, bones, flowers and stories that feel like they were found rather than invented.</p>
@@ -1920,6 +1943,28 @@
   </div>
   <p class="cd-mini-note" style="text-align:center">There are five little symbols hidden around the garden. Find them all.</p>
 </section>
+
+<div class="cd-sister-modal" id="cdSisterModal" aria-hidden="true">
+  <div class="cd-sister-card" role="dialog" aria-modal="true" aria-labelledby="cdSisterTitle">
+    <button class="cd-sister-close" id="cdSisterClose" aria-label="Close">×</button>
+    <p class="kicker">A LITTLE SECRET</p>
+    <h2 id="cdSisterTitle">For someone very special ✦</h2>
+    <p class="cd-sister-prompt">If you found this, you know the secret. Enter the little code.</p>
+    <form id="cdSisterForm" class="cd-sister-form">
+      <input id="cdSisterCode" type="text" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="six little numbers" aria-label="Secret code">
+      <button type="submit" class="button">Open the note</button>
+    </form>
+    <p class="cd-sister-error" id="cdSisterError" aria-live="polite"></p>
+    <div class="cd-sister-note" id="cdSisterNote" hidden>
+      <p class="cd-sister-note-title">To my little sister,</p>
+      <p>I am so, so proud of you.</p>
+      <p>You are ten years younger than me, but no matter how big you grow, you will always be my little sister.</p>
+      <p>As long as I am here, I will always look out for you, cheer you on, and love you. Wherever life takes us, you will always have me in your corner.</p>
+      <p>Keep being your funny, kind, wonderful self. You are very special, and I hope you always remember how loved you are.</p>
+      <p class="cd-sister-signoff">I love you always. ♥</p>
+    </div>
+  </div>
+</div>
 
 <div class="cd-drawn" id="cdDrawn"><div class="cd-drawn-card"><button class="modal-close" id="cdDrawnClose" aria-label="Close">×</button><p class="kicker">THE GARDEN ASKS</p><h2>What are you drawn to?</h2><p>Don't think too hard. Choose the thing your eye went to first.</p><div class="cd-drawn-grid"><button class="cd-drawn-choice" data-choice="moon"><span>🌙</span>Moon</button><button class="cd-drawn-choice" data-choice="moth"><span>🦋</span>Moth</button><button class="cd-drawn-choice" data-choice="garden"><span>🌿</span>Garden</button><button class="cd-drawn-choice" data-choice="star"><span>⭐</span>Star</button></div><div class="cd-drawn-result" id="cdDrawnResult"></div></div></div>
 <div class="cd-collectible-reward" id="cdCollectibleReward"><div class="cd-reward-card"><p class="kicker">THE GARDEN REMEMBERS</p><h3>You found all five.</h3><p>The moon, the moth, the leaf, the key and the star were all waiting for you.</p><p>Your reward is a <strong>free digital design</strong> from The Collective Designs.</p><div class="cd-reward-code" id="cdGardenRewardCode"></div><p class="cd-mini-note">Keep this code and email it to the studio when you're ready to claim your design.</p><button class="cd-game-button" id="cdRewardClose">Keep exploring</button></div></div>
@@ -3829,5 +3874,56 @@
 })();
 </script>
 
+<script>
+(function(){
+  const trigger=document.getElementById('cdSisterTrigger');
+  const modal=document.getElementById('cdSisterModal');
+  const close=document.getElementById('cdSisterClose');
+  const form=document.getElementById('cdSisterForm');
+  const input=document.getElementById('cdSisterCode');
+  const error=document.getElementById('cdSisterError');
+  const note=document.getElementById('cdSisterNote');
+  if(!trigger||!modal||!close||!form||!input||!error||!note) return;
+
+  let clicks=0;
+  let resetTimer=null;
+  trigger.addEventListener('click',()=>{
+    clicks++;
+    clearTimeout(resetTimer);
+    resetTimer=setTimeout(()=>{clicks=0;},1800);
+    if(clicks===3){
+      clicks=0;
+      note.hidden=true;
+      error.textContent='';
+      input.value='';
+      form.hidden=false;
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+      setTimeout(()=>input.focus(),80);
+    }
+  });
+
+  function closeSister(){
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden','true');
+  }
+  close.addEventListener('click',closeSister);
+  modal.addEventListener('click',e=>{if(e.target===modal) closeSister();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show')) closeSister();});
+
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(input.value.trim()==='160618'){
+      error.textContent='';
+      form.hidden=true;
+      note.hidden=false;
+    }else{
+      error.textContent='Not quite. Try again, little detective ✦';
+      input.focus();
+      input.select();
+    }
+  });
+})();
+</script>
 </body>
 </html>
