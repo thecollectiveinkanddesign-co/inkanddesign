@@ -59,7 +59,7 @@ dex<!doctype html>
 
 <style id="cd-flappy-bat-css">
 /* ---------------------------------------------------------
-   FLAPPY BAT — quiet little arcade game inside the garden
+   FLAPPY MOTH — quiet little moonlit arcade game inside the garden
    --------------------------------------------------------- */
 #cdFlappyBatScreen{display:none;text-align:center}
 #cdFlappyBatScreen.show{display:block}
@@ -1781,7 +1781,7 @@ dex<!doctype html>
           id="cdOpenFlappyBat"
           class="cd-game-button secondary"
         >
-          🦇 Flappy Bat
+          🦋 Flappy Moth
         </button>
 
       </div>
@@ -1809,26 +1809,26 @@ dex<!doctype html>
 
 
     <!-- =====================================================
-         FLAPPY BAT
+         FLAPPY MOTH
          ===================================================== -->
     <div id="cdFlappyBatScreen" aria-hidden="true">
       <div class="cd-bat-header">
         <div class="cd-game-eyebrow">Collective Designs · Moon Flight</div>
-        <h2 class="cd-game-title">Flappy Bat</h2>
-        <p>Keep the little bat in the moonlight. Tap, click or press Space to flap.</p>
+        <h2 class="cd-game-title">Flappy Moth</h2>
+        <p>Keep the little moth in the moonlight. Tap, click or press Space to flutter.</p>
       </div>
 
       <div class="cd-bat-wrap">
-        <canvas id="cdFlappyBatCanvas" width="760" height="430" aria-label="Flappy Bat game"></canvas>
+        <canvas id="cdFlappyBatCanvas" width="760" height="430" aria-label="Flappy Moth game"></canvas>
         <div class="cd-bat-hud">
           <span class="cd-bat-score" id="cdBatScore">0</span>
           <span>Best <strong id="cdBatBest">0</strong></span>
         </div>
         <div class="cd-bat-overlay" id="cdBatOverlay">
           <div class="cd-bat-panel">
-            <h3 id="cdBatPanelTitle">✦ Flappy Bat ✦</h3>
-            <p id="cdBatPanelText">A tiny moonlit arcade game. Find your rhythm and see how far you can fly.</p>
-            <button type="button" class="cd-bat-button" id="cdBatStart">Start flying</button>
+            <h3 id="cdBatPanelTitle">✦ Flappy Moth ✦</h3>
+            <p id="cdBatPanelText">A tiny moonlit arcade game. Find your rhythm and see how far you can glide.</p>
+            <button type="button" class="cd-bat-button" id="cdBatStart">Start fluttering</button>
             <div class="cd-bat-tip">Tap · click · or Space</div>
           </div>
         </div>
@@ -2844,17 +2844,17 @@ dex<!doctype html>
 
 
   /* =======================================================
-     FLAPPY BAT — endless little moonlit arcade game
+     FLAPPY MOTH — endless little moonlit arcade game
      ======================================================= */
   const batCtx = batCanvas.getContext("2d");
-  const BAT_BEST_KEY = "cdFlappyBatBest";
+  const BAT_BEST_KEY = "cdFlappyMothBest";
   let batRAF = null;
   let batRunning = false;
   let batStarted = false;
   let batLastTime = 0;
   let batWorld = 0;
   let batScore = 0;
-  let batBest = Number(localStorage.getItem(BAT_BEST_KEY) || 0);
+  let batBest = Number(localStorage.getItem(BAT_BEST_KEY) || localStorage.getItem("cdFlappyBatBest") || 0);
   let bat = {x:145,y:215,vy:0,r:15};
   let batPipes = [];
   let batSpawn = 0;
@@ -2877,9 +2877,9 @@ dex<!doctype html>
     batPipes=[];
     batScoreDisplay.textContent="0";
     drawBatScene();
-    batPanelTitle.textContent="✦ Flappy Bat ✦";
-    batPanelText.textContent="A tiny moonlit arcade game. Find your rhythm and see how far you can fly.";
-    batStartButton.textContent="Start flying";
+    batPanelTitle.textContent="✦ Flappy Moth ✦";
+    batPanelText.textContent="A tiny moonlit arcade game. Find your rhythm and see how far you can glide.";
+    batStartButton.textContent="Start fluttering";
     batOverlay.style.display="flex";
   }
 
@@ -2915,8 +2915,8 @@ dex<!doctype html>
       localStorage.setItem(BAT_BEST_KEY,String(batBest));
       batBestDisplay.textContent=String(batBest);
     }
-    batPanelTitle.textContent=batScore>=10?"✦ The bat is impressed ✦":"✦ Back to the garden ✦";
-    batPanelText.textContent=`You flew through ${batScore} moonlit gates. Take a breath and try again whenever you like.`;
+    batPanelTitle.textContent=batScore>=10?"✦ The moth is impressed ✦":"✦ Back to the garden ✦";
+    batPanelText.textContent=`You glided through ${batScore} moonlit gates. Take a breath and try again whenever you like.`;
     batStartButton.textContent="Fly again";
     batOverlay.style.display="flex";
   }
@@ -2972,10 +2972,10 @@ dex<!doctype html>
     batCtx.save();
     batCtx.translate(bat.x,bat.y);
     batCtx.rotate(Math.max(-.45,Math.min(.8,bat.vy*.045)));
-    batCtx.font="30px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif";
+    batCtx.font="32px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif";
     batCtx.textAlign="center";
     batCtx.textBaseline="middle";
-    batCtx.fillText("🦇",0,0);
+    batCtx.fillText("🦋",0,0);
     batCtx.restore();
   }
 

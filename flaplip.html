@@ -1,4 +1,4 @@
-dex<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -2888,7 +2888,7 @@ dex<!doctype html>
       startBat();
       return;
     }
-    bat.vy=-6.6;
+    bat.vy=-390;
   }
 
   function startBat(){
@@ -2896,7 +2896,7 @@ dex<!doctype html>
     batStarted=true;
     batRunning=true;
     batOverlay.style.display="none";
-    bat.vy=-5.8;
+    bat.vy=-330;
     batLastTime=performance.now();
     cancelAnimationFrame(batRAF);
     batRAF=requestAnimationFrame(batLoop);
@@ -2990,7 +2990,7 @@ dex<!doctype html>
     const dt=Math.min(.032,(now-batLastTime)/1000||.016);
     batLastTime=now;
     batWorld+=dt;
-    bat.vy+=18.5*dt;
+    bat.vy+=1050*dt;
     bat.y+=bat.vy*dt;
     batSpawn+=dt;
 
