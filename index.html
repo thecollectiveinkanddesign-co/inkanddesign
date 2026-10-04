@@ -2285,9 +2285,9 @@
      ========================================================= -->
 <div id="cdGardenMagic" aria-hidden="true"></div>
 
-<div class="cd-cursor-butterfly" id="cdCursorButterfly1" aria-hidden="true">🦋</div>
-<div class="cd-cursor-butterfly b2" id="cdCursorButterfly2" aria-hidden="true">🦋</div>
-<div class="cd-cursor-butterfly b3" id="cdCursorButterfly3" aria-hidden="true">🦋</div>
+<img class="cd-cursor-butterfly" id="cdCursorButterfly1" src="assets/moth.png" alt="" aria-hidden="true">
+<img class="cd-cursor-butterfly b2" id="cdCursorButterfly2" src="assets/moth.png" alt="" aria-hidden="true">
+<img class="cd-cursor-butterfly b3" id="cdCursorButterfly3" src="assets/moth.png" alt="" aria-hidden="true">
 
 <div class="cd-firefly-message" id="cdFireflyMessage">
   <span>“The garden noticed you.”</span>
@@ -2887,166 +2887,63 @@
 
   function placeAllWords() {
 
-    const shuffledWords =
-      [...WORDS].sort(
-        function () {
-          return Math.random() - 0.5;
+    const shuffledWords = [...WORDS].sort(() => Math.random() - 0.5).sort((a,b) => b.length - a.length);
+
+    function tryPlacement(word, randomOnly) {
+      const candidates = [];
+      for (let row = 0; row < GRID_SIZE; row++) {
+        for (let col = 0; col < GRID_SIZE; col++) {
+          for (const direction of DIRECTIONS) {
+            candidates.push({row, col, direction});
+          }
         }
-      );
-
-
-    shuffledWords.sort(
-      function (a, b) {
-        return b.length - a.length;
       }
-    );
-
-
-    shuffledWords.forEach(
-      function (word) {
-
-        let placed = false;
-
-
-        for (
-          let attempt = 0;
-          attempt < 500 &&
-          !placed;
-          attempt++
-        ) {
-
-          const direction =
-            DIRECTIONS[
-              Math.floor(
-                Math.random() *
-                DIRECTIONS.length
-              )
-            ];
-
-
-          const startRow =
-            Math.floor(
-              Math.random() *
-              GRID_SIZE
-            );
-
-
-          const startCol =
-            Math.floor(
-              Math.random() *
-              GRID_SIZE
-            );
-
-
-          const endRow =
-            startRow +
-            direction.row *
-            (word.length - 1);
-
-
-          const endCol =
-            startCol +
-            direction.col *
-            (word.length - 1);
-
-
-          if (
-            endRow < 0 ||
-            endRow >= GRID_SIZE ||
-            endCol < 0 ||
-            endCol >= GRID_SIZE
-          ) {
-
-            continue;
-
-          }
-
-
-          let valid = true;
-
-
-          for (
-            let i = 0;
-            i < word.length;
-            i++
-          ) {
-
-            const row =
-              startRow +
-              direction.row * i;
-
-
-            const col =
-              startCol +
-              direction.col * i;
-
-
-            const existing =
-              grid[row][col];
-
-
-            if (
-              existing &&
-              existing !== word[i]
-            ) {
-
-              valid = false;
-
-              break;
-
-            }
-
-          }
-
-
-          if (!valid) {
-            continue;
-          }
-
-
-          const cells = [];
-
-
-          for (
-            let i = 0;
-            i < word.length;
-            i++
-          ) {
-
-            const row =
-              startRow +
-              direction.row * i;
-
-
-            const col =
-              startCol +
-              direction.col * i;
-
-
-            grid[row][col] =
-              word[i];
-
-
-            cells.push({
-              row: row,
-              col: col
-            });
-
-          }
-
-
-          placements[word] =
-            cells;
-
-          placed = true;
-
+      if (randomOnly) {
+        candidates.sort(() => Math.random() - 0.5);
+        candidates.length = Math.min(candidates.length, 500);
+      }
+      for (const candidate of candidates) {
+        const {row:startRow, col:startCol, direction} = candidate;
+        const endRow = startRow + direction.row * (word.length - 1);
+        const endCol = startCol + direction.col * (word.length - 1);
+        if (endRow < 0 || endRow >= GRID_SIZE || endCol < 0 || endCol >= GRID_SIZE) continue;
+        let valid = true;
+        for (let i = 0; i < word.length; i++) {
+          const row = startRow + direction.row * i;
+          const col = startCol + direction.col * i;
+          const existing = grid[row][col];
+          if (existing && existing !== word[i]) { valid = false; break; }
         }
-
+        if (!valid) continue;
+        const cells = [];
+        for (let i = 0; i < word.length; i++) {
+          const row = startRow + direction.row * i;
+          const col = startCol + direction.col * i;
+          grid[row][col] = word[i];
+          cells.push({row, col});
+        }
+        placements[word] = cells;
+        return true;
       }
-    );
+      return false;
+    }
 
+    shuffledWords.forEach(word => {
+      if (tryPlacement(word, true)) return;
+      /* Exhaustive fallback: never render a word that has no valid path. */
+      if (tryPlacement(word, false)) return;
+      /* This should be unreachable on a 10x10 board with these word lengths. */
+      delete placements[word];
+    });
+
+    /* If an unexpected browser/layout edge case ever makes placement impossible,
+       regenerate before the player sees the board rather than creating an unwinnable game. */
+    if (Object.keys(placements).length !== WORDS.length) {
+      grid = createEmptyGrid();
+      placements = {};
+      shuffledWords.forEach(word => tryPlacement(word, false));
+    }
   }
-
 
   /* =======================================================
      FILL GRID
@@ -5101,6 +4998,18 @@ const cdColouringPages = ["data:image/webp;base64,UklGRj7TAABXRUJQVlA4IDLTAABQVQ
   requestAnimationFrame(tick);
 })();
 </script>
+
+
+<style id="cd-final-compatibility-layer">
+/* Restored base-site compatibility + Night Garden layering */
+.cd-cursor-butterfly{width:30px!important;height:30px!important;object-fit:contain;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 4px 10px rgba(40,20,45,.22));}
+.cd-cursor-butterfly.b2{width:24px!important;height:24px!important}.cd-cursor-butterfly.b3{width:20px!important;height:20px!important}
+#cdGardenMagic{z-index:99990!important;pointer-events:none!important}
+#cdGameOverlay,#cdFlappyBatModal,.modal{z-index:1000000!important}
+#cdWordBoard{position:relative;display:grid!important;grid-template-columns:repeat(10,minmax(0,1fr))!important;grid-template-rows:repeat(10,minmax(0,1fr))!important;width:min(540px,100%)!important;aspect-ratio:1/1!important;gap:3px!important;touch-action:none!important;user-select:none!important;-webkit-user-select:none!important}
+#cdWordBoard .cd-letter{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;cursor:crosshair;touch-action:none}
+@media(max-width:600px){#cdWordBoard{gap:2px!important}}
+</style>
 
 </body>
 </html>
