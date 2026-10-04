@@ -1882,7 +1882,7 @@
 .cd-daily{position:fixed;right:20px;bottom:20px;width:min(310px,calc(100vw - 120px));z-index:99992;pointer-events:auto;background:rgba(255,250,243,.93);border:1px solid rgba(104,70,95,.16);border-radius:16px;padding:14px 16px;box-shadow:0 15px 40px rgba(40,25,40,.18);color:#4d3748;backdrop-filter:blur(8px)}
 .cd-daily .date{font:9px Montserrat,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#8b7184}.cd-daily p{margin:7px 0 0;font:16px/1.45 Georgia,serif}.cd-daily button{float:right;border:0;background:none;color:#806078;cursor:pointer;font-size:16px}
 .cd-made-love{position:fixed;left:50%;bottom:8px;transform:translateX(-50%);z-index:99991;pointer-events:auto;font:10px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(104,70,95,.35);cursor:pointer;padding:8px}.cd-made-love:hover{color:#68465f}
-.cd-secret-token{position:absolute;z-index:30;width:24px;height:24px;border:0;background:transparent;color:#6f4d68;font-size:17px;cursor:pointer;opacity:.18;transition:.3s ease}.cd-secret-token:hover{opacity:.85;transform:scale(1.25) rotate(8deg)}.cd-secret-token.found{opacity:1;filter:drop-shadow(0 0 7px rgba(215,185,120,.8))}
+.cd-token-host{position:relative}.cd-secret-token{position:absolute;z-index:30;width:24px;height:24px;border:0;background:transparent;color:#6f4d68;font-size:17px;cursor:pointer;opacity:.18;transition:.3s ease}.cd-secret-token:hover{opacity:.85;transform:scale(1.25) rotate(8deg)}.cd-secret-token.found{opacity:1;filter:drop-shadow(0 0 7px rgba(215,185,120,.8))}
 .cd-garden-section{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(245,235,226,.5),rgba(235,220,212,.35));border-top:1px solid rgba(104,70,95,.08);border-bottom:1px solid rgba(104,70,95,.08)}
 .cd-garden-map{position:relative;min-height:560px;max-width:1050px;margin:auto;border-radius:28px;background:radial-gradient(circle at 50% 25%,rgba(245,230,198,.28),transparent 28%),linear-gradient(160deg,#2c2330,#17131a);overflow:hidden;box-shadow:0 25px 60px rgba(30,20,30,.18)}
 .cd-map-path{position:absolute;border:2px dashed rgba(233,214,182,.2);border-radius:50%;pointer-events:none}.cd-map-path.p1{inset:70px 140px}.cd-map-path.p2{inset:150px 280px}.cd-map-star{position:absolute;color:#e9d8ae;opacity:.7;font-size:12px;animation:cdTwinkle 2.5s ease-in-out infinite alternate}@keyframes cdTwinkle{to{opacity:.25;transform:scale(.7)}}
@@ -3649,5 +3649,185 @@
 })();
 
 </script>
+<script id="cd-night-garden-js">
+(function(){
+  'use strict';
+  if(window.__cdNightGardenReady) return;
+  window.__cdNightGardenReady = true;
+
+  const $ = id => document.getElementById(id);
+  const fireflyLayer = $('cdGardenMagic');
+  const fireflyMessage = $('cdFireflyMessage');
+  const moth = $('cdCursorMoth');
+  const candle = $('cdGardenCandle');
+
+  // 365 daily messages: 73 observations x 5 endings.
+  const observations = [
+    'Something quiet is becoming important', 'You are allowed to take the long way home', 'A small idea deserves a little more moonlight', 'Your timing is stranger and better than you think', 'There is beauty in what you have not finished yet',
+    'A forgotten detail may become the best part', 'You do not need to explain every instinct', 'The thing you keep noticing is worth noticing', 'Let curiosity choose the next step', 'A softer approach may get you further',
+    'Your imagination is asking for room', 'Not everything meaningful needs an audience', 'A little mystery can be good for the soul', 'Make something before you make it perfect', 'Your next chapter may begin quietly',
+    'Keep the strange little thought', 'Rest is part of the making', 'Something old can become useful again', 'The right door may look ordinary', 'Follow what makes you linger',
+    'Your eye knows more than your checklist', 'A change of scenery could change the question', 'There is no prize for rushing the magic', 'Let one unfinished thing breathe', 'You are closer than the mood suggests',
+    'A detail you almost skipped may matter', 'Trust the version that feels most like you', 'Make space for an unexpected yes', 'A gentle boundary can protect beautiful work', 'The quiet answer is still an answer',
+    'Your hands may know what your head is debating', 'Collect moments, not just outcomes', 'Something wants to grow at its own speed', 'A little bravery looks good on you', 'You can change your mind without losing yourself',
+    'The unusual route may reveal the better view', 'Keep your standards, loosen your grip', 'Your future self will thank you for the tiny step', 'There is more than one right shape for this', 'A pause can be productive',
+    'Let the work surprise you', 'Not every closed door is a rejection', 'Your taste is telling you something', 'A little play may solve the serious problem', 'Protect the spark before you polish it',
+    'Someone may need the thing you are making', 'The smallest ritual can anchor a big change', 'Your next good idea may arrive sideways', 'Notice what makes time disappear', 'You are permitted to begin again',
+    'A slower morning can contain a sharper thought', 'There is strength in choosing less', 'The unfinished path still counts as a path', 'Let your standards serve you, not scare you', 'A beautiful life can be built from tiny choices',
+    'The answer may be hiding in the margins', 'Keep one corner of your day unplanned', 'Your curiosity is a compass', 'Something ordinary is about to feel significant', 'You can make room without knowing what fills it',
+    'The next step does not need the whole map', 'A little wonder is a practical thing', 'What feels subtle now may become obvious later', 'Your best work may start as a strange sketch', 'Leave room for coincidence',
+    'You have permission to protect your peace', 'A new pattern is forming', 'Do not mistake quiet for nothing happening', 'The thing you love can be enough reason', 'Try the version that makes you smile',
+    'There is a hidden door in the routine', 'Let yourself be a beginner at something', 'A good question can be more useful than a quick answer', 'The garden grows between plans', 'Your attention is one of your gifts',
+    'Make the small thing beautiful', 'You are allowed to want more texture in your days', 'Something you thought was over may simply be changing shape'
+  ];
+  const endings = [
+    'Today, choose the gentlest next move.',
+    'Leave a little room for surprise.',
+    'The moon does not hurry, and neither should you.',
+    'Follow the detail that makes you look twice.',
+    'Let this be your permission slip to notice.'
+  ];
+
+  function dailyMessage(){
+    const now = new Date();
+    const start = Date.UTC(now.getFullYear(),0,1);
+    const today = Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+    const day = Math.floor((today-start)/86400000);
+    const index = day % 365;
+    const obs = observations[Math.floor(index/5) % observations.length];
+    const ending = endings[index % endings.length];
+    return {index, text: obs + '. ' + ending};
+  }
+
+  const daily = $('cdDaily');
+  const dailyDate = $('cdDailyDate');
+  const dailyText = $('cdDailyText');
+  if(daily && dailyDate && dailyText){
+    const d = new Date();
+    dailyDate.textContent = d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+    dailyText.textContent = dailyMessage().text;
+    const close = $('cdDailyClose');
+    if(close) close.addEventListener('click',()=>daily.remove());
+  }
+
+  // Real lunar phase using a known new moon and the synodic cycle.
+  const moonNames = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+  const moonSymbols = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+  function moonPhase(){
+    const synodic = 29.530588853;
+    const knownNewMoon = Date.UTC(2000,0,6,18,14);
+    const age = ((Date.now()-knownNewMoon)/86400000) % synodic;
+    const normalized = age < 0 ? age + synodic : age;
+    const index = Math.round(normalized/synodic*8) % 8;
+    return {index,name:moonNames[index],symbol:moonSymbols[index]};
+  }
+  const phase = moonPhase();
+  if(candle) candle.title = phase.symbol + ' ' + phase.name + ' · The garden has been burning this candle all day.';
+
+  // Cursor moth.
+  let mx=0,my=0,tx=0,ty=0,hideTimer;
+  if(moth){
+    document.addEventListener('pointermove',e=>{
+      mx=e.clientX+16; my=e.clientY-8; moth.style.opacity='.78';
+      clearTimeout(hideTimer); hideTimer=setTimeout(()=>moth.style.opacity='0',3500);
+    },{passive:true});
+    function animate(){ tx += (mx-tx)*.12; ty += (my-ty)*.12; moth.style.transform=`translate3d(${tx}px,${ty}px,0)`; requestAnimationFrame(animate); }
+    animate();
+  }
+
+  // Fireflies.
+  if(fireflyLayer){
+    for(let i=0;i<12;i++){
+      const f=document.createElement('button');
+      f.type='button'; f.className='cd-firefly'; f.setAttribute('aria-label','A firefly');
+      f.style.left=(5+Math.random()*90)+'%'; f.style.top=(8+Math.random()*78)+'%';
+      f.style.animationDelay=(-Math.random()*7)+'s';
+      f.addEventListener('click',()=>{fireflyMessage?.classList.add('show'); setTimeout(()=>fireflyMessage?.classList.remove('show'),2600);});
+      fireflyLayer.appendChild(f);
+    }
+  }
+  fireflyMessage?.addEventListener('click',()=>fireflyMessage.classList.remove('show'));
+
+  // Candle wax burns through during the day.
+  function updateCandle(){
+    if(!candle) return;
+    const now=new Date(), minutes=now.getHours()*60+now.getMinutes();
+    const start=6*60, end=24*60;
+    const progress=Math.max(0,Math.min(1,(minutes-start)/(end-start)));
+    candle.style.setProperty('--cd-wax-height',(88-48*progress)+'px');
+  }
+  updateCandle();
+  setInterval(updateCandle,60000);
+
+  $('cdMadeLove')?.addEventListener('click',()=>{
+    if(fireflyMessage){fireflyMessage.querySelector('span').textContent='Made with love, a little moonlight, and far too many tiny details. ✦'; fireflyMessage.classList.add('show'); setTimeout(()=>{fireflyMessage.classList.remove('show'); fireflyMessage.querySelector('span').textContent='“The garden noticed you.”';},3600);}
+  });
+
+  // Drawn-to experience.
+  const drawn=$('cdDrawn'), drawnResult=$('cdDrawnResult');
+  const readings={
+    moon:'You are drawn to quiet intensity. Trust your timing, protect your inner world, and let things arrive when they are ready.',
+    moth:'You are drawn to transformation. Follow the light, but remember you have your own wings.',
+    garden:'You are drawn to growth with texture. Make room for what wants to grow, even if it grows strangely.',
+    star:'You are drawn to possibility. A strange little idea may be the beginning of something bigger.'
+  };
+  document.querySelectorAll('.cd-drawn-choice').forEach(btn=>btn.addEventListener('click',()=>{drawnResult.textContent=readings[btn.dataset.choice]||'';drawnResult.classList.add('show');}));
+  $('cdDrawnClose')?.addEventListener('click',()=>drawn?.classList.remove('show'));
+  document.querySelectorAll('[data-drawn]').forEach(btn=>btn.addEventListener('click',()=>drawn?.classList.add('show')));
+
+  // Garden map navigation.
+  document.querySelectorAll('[data-scroll]').forEach(btn=>btn.addEventListener('click',()=>{
+    const id=btn.dataset.scroll;
+    const target=$(id);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+  $('cdPostbox')?.addEventListener('click',()=>alert('You were always meant to find this place.'));
+  $('cdGardenCat')?.addEventListener('click',()=>alert('The cat noticed you. The cat has decided not to comment.\n\nNo reward. Only judgment.'));
+  $('cdClearing')?.addEventListener('click',()=>$('collectiveDesignsSecret')?.click());
+
+  // Bloom as the visitor scrolls.
+  const bloomTargets=document.querySelectorAll('.section h2,.section h3,.piece,.product');
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('cd-bloom','cd-bloomed');observer.unobserve(entry.target);}}),{threshold:.15});
+    bloomTargets.forEach(el=>observer.observe(el));
+  } else bloomTargets.forEach(el=>el.classList.add('cd-bloomed'));
+
+  // Five hidden symbols, persistent on this browser.
+  const tokenData=[
+    ['moon','☾','#work',18,24],
+    ['moth','🦋','#flash',82,38],
+    ['leaf','❧','#about',12,62],
+    ['key','⚿','#shop',86,72],
+    ['star','✦','#contact',50,28]
+  ];
+  const storageKey='cdNightGardenTokens';
+  let found=[];
+  try{found=JSON.parse(localStorage.getItem(storageKey)||'[]'); if(!Array.isArray(found)) found=[];}catch(e){found=[];}
+  const reward=$('cdCollectibleReward'), rewardCode=$('cdGardenRewardCode');
+  function showReward(){
+    let code='';
+    try{code=localStorage.getItem('cdGardenRewardCode')||'';}catch(e){}
+    if(!code){code='GARDEN-GIFT-'+Math.random().toString(36).slice(2,8).toUpperCase();try{localStorage.setItem('cdGardenRewardCode',code);}catch(e){}}
+    if(rewardCode) rewardCode.textContent=code;
+    reward?.classList.add('show');
+  }
+  function collect(id,el){
+    if(!found.includes(id)){found.push(id);try{localStorage.setItem(storageKey,JSON.stringify(found));}catch(e){}}
+    el.classList.add('found');
+    if(found.length===tokenData.length) showReward();
+  }
+  tokenData.forEach(([id,symbol,selector,left,top])=>{
+    const host=document.querySelector(selector); if(!host) return;
+    host.classList.add('cd-token-host');
+    const token=document.createElement('button'); token.type='button'; token.className='cd-secret-token'; token.textContent=symbol; token.title='Something is hiding here'; token.setAttribute('aria-label','Hidden garden symbol');
+    token.style.left=left+'%'; token.style.top=top+'%';
+    if(found.includes(id)) token.classList.add('found');
+    token.addEventListener('click',()=>collect(id,token));
+    host.appendChild(token);
+  });
+  $('cdRewardClose')?.addEventListener('click',()=>reward?.classList.remove('show'));
+})();
+</script>
+
 </body>
 </html>
