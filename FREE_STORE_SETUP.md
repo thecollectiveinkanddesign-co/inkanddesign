@@ -7,7 +7,6 @@ This package adds the first store layer to the existing GitHub Pages website wit
 - Product detail popups
 - Size/colour selection
 - Cart stored in the visitor's browser
-- Midnight Dragon Hoodie added to the shop
 - Printful marked as the intended POD fulfiller
 - No API keys or payment secrets in browser code
 

@@ -37,7 +37,6 @@ if (year) year.textContent = new Date().getFullYear();
 
   const PRODUCTS = {
     'Midnight Dragon Tee': { category:'APPAREL', description:'Black cotton tee with the Midnight Dragon artwork.', price:null, currency:'ZAR', sizes:['XS','S','M','L','XL','2XL'], colors:['Black'], pod:'Printful' },
-    'Midnight Dragon Hoodie': { category:'APPAREL', description:'Soft everyday hoodie with the Midnight Dragon back artwork.', price:null, currency:'ZAR', sizes:['S','M','L','XL','2XL'], colors:['Black'], pod:'Printful' },
     'Moonlit Notes': { category:'STATIONERY', description:'Moonlit art cards, letter paper and envelopes.', price:null, currency:'ZAR', sizes:['One size'], colors:['Warm cream'], pod:'Printful' },
     'Hollow Art Print': { category:'PRINTS', description:'Gothic botanical archival art print.', price:null, currency:'ZAR', sizes:['A4'], colors:['Warm paper'], pod:'Printful' },
     'Night Garden Sticker Set': { category:'PAPER GOODS', description:'Six illustrated vinyl stickers from the Night Garden.', price:null, currency:'ZAR', sizes:['One size'], colors:['Mixed'], pod:'Printful' }
@@ -173,17 +172,6 @@ if (year) year.textContent = new Date().getFullYear();
     const body=encodeURIComponent(`Hi Collective Designs!\n\nI'd like to place this order:\n\n${orderLines}\n\nTotal: ${money(total(cart))}\n\nName:\nShipping address:\nPhone:\n\nPlease send me the payment/shipping instructions.\n`);
     window.location.href=`mailto:thecollective.inkanddesign@gmail.com?subject=${subject}&body=${body}`;
   });
-
-  if(!document.querySelector('[data-product="Midnight Dragon Hoodie"]')){
-    const grid=document.querySelector('#shop .product-grid');
-    if(grid){
-      const card=document.createElement('article'); card.className='product';
-      card.innerHTML=`<div class="product-art shirt" role="button" tabindex="0" aria-label="Preview Midnight Dragon Hoodie"><div class="shirt-shape"><span class="mini-logo">☾<b> THE COLLECTIVE</b><small>DESIGNS</small></span><span class="shirt-dragon">♆</span></div></div><div class="product-info"><span>APPAREL</span><h3>Midnight Dragon Hoodie</h3><p>Black hoodie · dragon & moon back artwork</p><button data-product="Midnight Dragon Hoodie">Shop this piece</button></div>`;
-      grid.insertBefore(card,grid.children[1]||null);
-      card.querySelector('[data-product]').addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();productDialog('Midnight Dragon Hoodie');});
-      card.querySelector('.product-art').addEventListener('click',e=>{e.preventDefault();productDialog('Midnight Dragon Hoodie');});
-    }
-  }
 
   renderCart();
 })();
