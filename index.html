@@ -1,4 +1,4 @@
-dex<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -56,29 +56,6 @@ dex<!doctype html>
   .cd-colour-note{text-align:center;font-size:11px;opacity:.62;margin:6px 0 0}
   @media(max-width:600px){.cd-colour-card{padding:12px}.cd-colour-top h2{font-size:26px}.cd-colour-work{padding:4px}}
 </style>
-
-<style id="cd-flappy-moth-css">
-/* ---------------------------------------------------------
-   FLAPPY MOTH — quiet little moonlit arcade game inside the garden
-   --------------------------------------------------------- */
-#cdFlappyMothScreen{display:none;text-align:center}
-#cdFlappyMothScreen.show{display:block}
-.cd-moth-header{max-width:620px;margin:0 auto 16px}
-.cd-moth-header h2{margin:0 0 8px}
-.cd-moth-header p{margin:0;opacity:.72}
-.cd-moth-wrap{position:relative;width:min(760px,100%);margin:18px auto 12px;border-radius:24px;overflow:hidden;background:rgba(39,28,42,.08);border:1px solid rgba(76,54,80,.12);box-shadow:0 16px 45px rgba(40,25,45,.08)}
-#cdFlappyMothCanvas{display:block;width:100%;height:auto;aspect-ratio:760/430;touch-action:none;cursor:pointer}
-.cd-moth-hud{position:absolute;left:18px;right:18px;top:14px;display:flex;justify-content:space-between;pointer-events:none;font-size:.82rem;letter-spacing:.04em;opacity:.72}
-.cd-moth-score{font-weight:700}
-.cd-moth-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;pointer-events:none}
-.cd-moth-panel{max-width:390px;padding:20px 22px;border-radius:20px;background:rgba(250,246,238,.88);backdrop-filter:blur(8px);box-shadow:0 15px 40px rgba(40,25,45,.12);pointer-events:auto}
-.cd-moth-panel h3{margin:0 0 8px;font-size:1.35rem}
-.cd-moth-panel p{margin:0 0 14px;line-height:1.5;opacity:.76}
-.cd-moth-button{border:1px solid rgba(76,54,80,.18);background:rgba(76,54,80,.08);color:inherit;border-radius:999px;padding:9px 15px;cursor:pointer;font:inherit}
-.cd-moth-button:hover{background:rgba(76,54,80,.13)}
-.cd-moth-tip{font-size:.82rem;opacity:.62;margin:7px 0 0}
-</style>
-
 </head>
 <body>
   <div class="grain"></div>
@@ -1776,14 +1753,6 @@ dex<!doctype html>
           Return to Garden
         </button>
 
-        <button
-          type="button"
-          id="cdOpenFlappyMoth"
-          class="cd-game-button secondary"
-        >
-          🦋 Flappy Moth
-        </button>
-
       </div>
 
 
@@ -1805,40 +1774,6 @@ dex<!doctype html>
 
     </div>
 
-
-
-
-    <!-- =====================================================
-         FLAPPY MOTH
-         ===================================================== -->
-    <div id="cdFlappyMothScreen" aria-hidden="true">
-      <div class="cd-moth-header">
-        <div class="cd-game-eyebrow">Collective Designs · Moon Flight</div>
-        <h2 class="cd-game-title">Flappy Moth</h2>
-        <p>Keep the little moth in the moonlight. Tap, click or press Space to flutter.</p>
-      </div>
-
-      <div class="cd-moth-wrap">
-        <canvas id="cdFlappyMothCanvas" width="760" height="430" aria-label="Flappy Moth game"></canvas>
-        <div class="cd-moth-hud">
-          <span class="cd-moth-score" id="cdMothScore">0</span>
-          <span>Best <strong id="cdMothBest">0</strong></span>
-        </div>
-        <div class="cd-moth-overlay" id="cdMothOverlay">
-          <div class="cd-moth-panel">
-            <h3 id="cdMothPanelTitle">✦ Flappy Moth ✦</h3>
-            <p id="cdMothPanelText">A tiny moonlit arcade game. Find your rhythm and see how far you can glide.</p>
-            <button type="button" class="cd-moth-button" id="cdMothStart">Start fluttering</button>
-            <div class="cd-moth-tip">Tap · click · or Space</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cd-game-actions">
-        <button type="button" id="cdMothBack" class="cd-game-button secondary">Back to Word Search</button>
-        <button type="button" id="cdMothReset" class="cd-game-button">New Flight</button>
-      </div>
-    </div>
 
     <!-- =====================================================
          PRIZE WHEEL
@@ -2526,39 +2461,6 @@ dex<!doctype html>
       "cdWordSearchScreen"
     );
 
-  const flappyMothScreen =
-    document.getElementById("cdFlappyMothScreen");
-
-  const openFlappyMothButton =
-    document.getElementById("cdOpenFlappyMoth");
-
-  const mothCanvas =
-    document.getElementById("cdFlappyMothCanvas");
-
-  const mothScoreDisplay =
-    document.getElementById("cdMothScore");
-
-  const mothBestDisplay =
-    document.getElementById("cdMothBest");
-
-  const mothOverlay =
-    document.getElementById("cdMothOverlay");
-
-  const mothPanelTitle =
-    document.getElementById("cdMothPanelTitle");
-
-  const mothPanelText =
-    document.getElementById("cdMothPanelText");
-
-  const mothStartButton =
-    document.getElementById("cdMothStart");
-
-  const mothBackButton =
-    document.getElementById("cdMothBack");
-
-  const mothResetButton =
-    document.getElementById("cdMothReset");
-
   const prizeScreen =
     document.getElementById(
       "cdPrizeScreen"
@@ -2758,7 +2660,6 @@ dex<!doctype html>
       "";
 
     stopTimer();
-    stopFlappyMoth();
 
   }
 
@@ -2830,205 +2731,13 @@ dex<!doctype html>
 
     wordSearchScreen.style.display =
       "block";
-    flappyMothScreen.classList.remove("show");
-    flappyMothScreen.setAttribute("aria-hidden","true");
 
     prizeScreen.classList.remove(
       "show"
     );
 
-    stopFlappyMoth();
-
   }
 
-
-
-  /* =======================================================
-     FLAPPY MOTH — endless little moonlit arcade game
-     ======================================================= */
-  const mothCtx = mothCanvas.getContext("2d");
-  const MOTH_BEST_KEY = "cdFlappyMothBest";
-  let mothRAF = null;
-  let mothRunning = false;
-  let mothStarted = false;
-  let mothLastTime = 0;
-  let mothWorld = 0;
-  let mothScore = 0;
-  let mothBest = Number(localStorage.getItem(MOTH_BEST_KEY) || localStorage.getItem("cdFlappyMothBest") || 0);
-  let moth = {x:145,y:215,vy:0,r:15};
-  let mothPipes = [];
-  let mothSpawn = 0;
-
-  mothBestDisplay.textContent = String(mothBest);
-
-  function mothResizeScale(){
-    const rect=mothCanvas.getBoundingClientRect();
-    return {sx:mothCanvas.width/rect.width,sy:mothCanvas.height/rect.height};
-  }
-
-  function resetMothScene(){
-    mothRunning=false;
-    mothStarted=false;
-    mothLastTime=0;
-    mothWorld=0;
-    mothScore=0;
-    mothSpawn=0;
-    bat={x:145,y:215,vy:0,r:15};
-    mothPipes=[];
-    mothScoreDisplay.textContent="0";
-    drawMothScene();
-    mothPanelTitle.textContent="✦ Flappy Moth ✦";
-    mothPanelText.textContent="A tiny moonlit arcade game. Find your rhythm and see how far you can glide.";
-    mothStartButton.textContent="Start fluttering";
-    mothOverlay.style.display="flex";
-  }
-
-  function flapMoth(){
-    if(!mothStarted || !mothRunning){
-      startMoth();
-      return;
-    }
-    moth.vy=-6.6;
-  }
-
-  function startMoth(){
-    resetMothScene();
-    mothStarted=true;
-    mothRunning=true;
-    mothOverlay.style.display="none";
-    moth.vy=-5.8;
-    mothLastTime=performance.now();
-    cancelAnimationFrame(mothRAF);
-    mothRAF=requestAnimationFrame(mothLoop);
-  }
-
-  function stopFlappyMoth(){
-    mothRunning=false;
-    cancelAnimationFrame(mothRAF);
-    mothRAF=null;
-  }
-
-  function endMoth(){
-    mothRunning=false;
-    if(mothScore>mothBest){
-      mothBest=mothScore;
-      localStorage.setItem(MOTH_BEST_KEY,String(mothBest));
-      mothBestDisplay.textContent=String(mothBest);
-    }
-    mothPanelTitle.textContent=mothScore>=10?"✦ The moth is impressed ✦":"✦ Back to the garden ✦";
-    mothPanelText.textContent=`You glided through ${mothScore} moonlit gates. Take a breath and try again whenever you like.`;
-    mothStartButton.textContent="Fly again";
-    mothOverlay.style.display="flex";
-  }
-
-  function addMothPipe(){
-    const gap=142;
-    const minTop=62;
-    const maxTop=mothCanvas.height-gap-62;
-    const top=minTop+Math.random()*(maxTop-minTop);
-    mothPipes.push({x:mothCanvas.width+28,top,gap,passed:false,w:62});
-  }
-
-  function circleRectHit(cx,cy,r,rx,ry,rw,rh){
-    const x=Math.max(rx,Math.min(cx,rx+rw));
-    const y=Math.max(ry,Math.min(cy,ry+rh));
-    const dx=cx-x,dy=cy-y;
-    return dx*dx+dy*dy<r*r;
-  }
-
-  function drawMothBackground(){
-    const g=mothCtx.createLinearGradient(0,0,0,mothCanvas.height);
-    g.addColorStop(0,"#eee7dc");
-    g.addColorStop(1,"#dcd0d7");
-    mothCtx.fillStyle=g;
-    mothCtx.fillRect(0,0,mothCanvas.width,mothCanvas.height);
-
-    mothCtx.globalAlpha=.42;
-    mothCtx.fillStyle="#fffaf1";
-    mothCtx.beginPath();mothCtx.arc(620,82,34,0,Math.PI*2);mothCtx.fill();
-    mothCtx.globalAlpha=1;
-
-    mothCtx.strokeStyle="rgba(69,48,73,.10)";
-    mothCtx.lineWidth=2;
-    for(let i=0;i<7;i++){
-      const y=335+i*15;
-      mothCtx.beginPath();
-      mothCtx.moveTo(0,y);
-      for(let x=0;x<=760;x+=38) mothCtx.lineTo(x,y+Math.sin(x*.035+i)*5);
-      mothCtx.stroke();
-    }
-  }
-
-  function drawMothPipe(p){
-    mothCtx.fillStyle="rgba(69,48,73,.30)";
-    mothCtx.fillRect(p.x,0,p.w,p.top);
-    mothCtx.fillRect(p.x,p.top+p.gap,p.w,mothCanvas.height-(p.top+p.gap));
-    mothCtx.fillStyle="rgba(69,48,73,.12)";
-    mothCtx.fillRect(p.x-6,p.top-8,p.w+12,8);
-    mothCtx.fillRect(p.x-6,p.top+p.gap,p.w+12,8);
-  }
-
-  function drawMoth(){
-    mothCtx.save();
-    mothCtx.translate(moth.x,moth.y);
-    mothCtx.rotate(Math.max(-.45,Math.min(.8,moth.vy*.045)));
-    mothCtx.font="32px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif";
-    mothCtx.textAlign="center";
-    mothCtx.textBaseline="middle";
-    mothCtx.fillText("🦋",0,0);
-    mothCtx.restore();
-  }
-
-  function drawMothScene(){
-    drawMothBackground();
-    mothPipes.forEach(drawMothPipe);
-    drawMoth();
-  }
-
-  function mothLoop(now){
-    if(!mothRunning)return;
-    const dt=Math.min(.032,(now-mothLastTime)/1000||.016);
-    mothLastTime=now;
-    mothWorld+=dt;
-    moth.vy+=18.5*dt;
-    moth.y+=moth.vy*dt;
-    mothSpawn+=dt;
-
-    if(mothSpawn>.95){addMothPipe();mothSpawn=0;}
-    mothPipes.forEach(p=>p.x-=185*dt);
-
-    for(const p of mothPipes){
-      if(!p.passed && p.x+p.w<moth.x){p.passed=true;mothScore++;mothScoreDisplay.textContent=String(mothScore);}
-      if(circleRectHit(moth.x,moth.y,moth.r,p.x,0,p.w,p.top) || circleRectHit(moth.x,moth.y,moth.r,p.x,p.top+p.gap,p.w,mothCanvas.height-(p.top+p.gap))){endMoth();break;}
-    }
-    mothPipes=mothPipes.filter(p=>p.x>-90);
-    if(moth.y-moth.r<0 || moth.y+moth.r>mothCanvas.height){endMoth();}
-
-    drawMothScene();
-    if(mothRunning)mothRAF=requestAnimationFrame(mothLoop);
-  }
-
-  function mothInput(e){
-    if(e) e.preventDefault();
-    flapMoth();
-  }
-
-  openFlappyMothButton.addEventListener("click",()=>{
-    wordSearchScreen.style.display="none";
-    prizeScreen.classList.remove("show");
-    flappyMothScreen.classList.add("show");
-    flappyMothScreen.setAttribute("aria-hidden","false");
-    resetMothScene();
-    setTimeout(()=>mothCanvas.focus?.(),30);
-  });
-  mothStartButton.addEventListener("click",startMoth);
-  mothResetButton.addEventListener("click",resetMothScene);
-  mothBackButton.addEventListener("click",showWordSearch);
-  mothCanvas.addEventListener("pointerdown",mothInput,{passive:false});
-  document.addEventListener("keydown",e=>{
-    if(!flappyMothScreen.classList.contains("show"))return;
-    if(e.code==="Space"){mothInput(e);}
-  },{passive:false});
 
   /* =======================================================
      NEW GAME
@@ -5257,5 +4966,141 @@ const cdColouringPages = ["data:image/webp;base64,UklGRj7TAABXRUJQVlA4IDLTAABQVQ
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show')) shut()});
 })();
 </script>
+
+<style id="cd-flappy-bat-style">
+#cdFlappyBatSecret{display:inline-flex;align-items:center;gap:7px;margin:12px auto 0;border:0;background:transparent;color:rgba(84,58,77,.56);font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;opacity:.72;transition:opacity .2s,transform .2s}
+#cdFlappyBatSecret:hover{opacity:1;transform:translateY(-1px)}
+#cdFlappyBatSecret .bat-glyph{font-size:17px;filter:grayscale(1) sepia(.18) saturate(.35);opacity:.75}
+#cdFlappyBatModal{display:none;position:fixed;inset:0;z-index:1000010;background:rgba(14,10,17,.72);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:18px}
+#cdFlappyBatModal.show{display:flex}
+.cd-bat-card{position:relative;width:min(920px,96vw);height:min(680px,92vh);overflow:hidden;background:linear-gradient(180deg,#17111d,#211927 62%,#111318);border:1px solid rgba(226,208,218,.14);box-shadow:0 30px 90px rgba(0,0,0,.48);color:#e7d9d0}
+.cd-bat-close{position:absolute;z-index:30;right:12px;top:8px;border:0;background:transparent;color:#e7d9d0;font-size:30px;cursor:pointer;opacity:.65}
+.cd-bat-close:hover{opacity:1}
+#cdBatGame{position:absolute;inset:0;overflow:hidden;touch-action:none}
+.cd-bat-sky{position:absolute;inset:0;background:radial-gradient(circle at 76% 18%,rgba(188,163,192,.17),transparent 23%),radial-gradient(circle at 15% 78%,rgba(91,117,91,.13),transparent 28%),linear-gradient(180deg,#17111d,#261a29 58%,#101216)}
+.cd-bat-moon{position:absolute;right:10%;top:8%;font-size:76px;color:#dfd0c3;opacity:.45;pointer-events:none}
+.cd-bat-stars{position:absolute;inset:0;color:#cdbdc3;opacity:.22;letter-spacing:24px;line-height:2.7;font-size:16px;pointer-events:none}
+.cd-bat-message{position:absolute;top:9%;left:20px;right:20px;text-align:center;font:28px/1.35 Georgia,serif;color:#e7d9d0;text-shadow:0 2px 12px rgba(0,0,0,.55);z-index:20;pointer-events:none}
+.cd-bat-message small{display:block;margin-top:8px;font-size:14px;opacity:.68}
+.cd-bat-score{position:absolute;top:18px;left:0;right:0;text-align:center;font:42px Georgia,serif;color:#d8c8bd;text-shadow:0 2px 10px rgba(0,0,0,.5);z-index:20;pointer-events:none}
+.cd-bat{position:absolute;left:28%;top:40%;z-index:12;font-size:50px;line-height:1;user-select:none;transform-origin:center;filter:drop-shadow(0 5px 8px rgba(0,0,0,.35));will-change:top,transform}
+.cd-bat-pipe{position:absolute;width:62px;background:linear-gradient(90deg,#302337,#4c3a48,#302337);border-radius:5px;box-shadow:inset 0 0 0 1px rgba(220,200,210,.08),0 4px 15px rgba(0,0,0,.28);z-index:7}
+.cd-bat-pipe::before{content:'❧';position:absolute;left:50%;transform:translateX(-50%);color:#8c777b;opacity:.34;font-size:23px;line-height:1}
+.cd-bat-ground{position:absolute;left:0;right:0;bottom:0;height:32px;background:linear-gradient(180deg,rgba(46,56,43,.2),rgba(20,24,20,.8));z-index:10}
+.cd-bat-hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#bbaab0;font:11px Georgia,serif;opacity:.42;z-index:20;pointer-events:none}
+@media(max-width:600px){.cd-bat-card{height:88vh}.cd-bat{font-size:42px}.cd-bat-pipe{width:50px}.cd-bat-message{font-size:24px}.cd-bat-score{font-size:36px}}
+</style>
+
+<div style="text-align:center;position:relative;z-index:3">
+  <button id="cdFlappyBatSecret" type="button" aria-label="Open the little bat game" title="A little bat is waiting">
+    <span class="bat-glyph">🦇</span><span>the little bat</span>
+  </button>
+</div>
+
+<div id="cdFlappyBatModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Flappy Bat">
+  <div class="cd-bat-card">
+    <button class="cd-bat-close" id="cdBatClose" type="button" aria-label="Close">×</button>
+    <div id="cdBatGame">
+      <div class="cd-bat-sky"></div>
+      <div class="cd-bat-moon" aria-hidden="true">☾</div>
+      <div class="cd-bat-stars" aria-hidden="true">✦ · ✧ · ✦ · · ✧ · ✦</div>
+      <div class="cd-bat-message" id="cdBatMessage">Press Enter To Start</div>
+      <div class="cd-bat-score"><span id="cdBatScore">0</span></div>
+      <div class="cd-bat" id="cdBat">🦇</div>
+      <div class="cd-bat-ground"></div>
+      <div class="cd-bat-hint">Enter to start · Space to fly · Esc to leave</div>
+    </div>
+  </div>
+</div>
+
+<script id="cd-flappy-bat-js">
+(function(){
+  'use strict';
+  const open=document.getElementById('cdFlappyBatSecret');
+  const modal=document.getElementById('cdFlappyBatModal');
+  const close=document.getElementById('cdBatClose');
+  const game=document.getElementById('cdBatGame');
+  const bat=document.getElementById('cdBat');
+  const scoreVal=document.getElementById('cdBatScore');
+  const message=document.getElementById('cdBatMessage');
+  if(!open||!modal||!game||!bat) return;
+
+  let gameState='start', gravity=2, velocity=0, pipes=[], score=0, loop=null, spawnTimer=0, last=0;
+  const flapPower=-10;
+
+  function clearPipes(){
+    pipes.forEach(p=>p.element?.remove());
+    pipes=[];
+  }
+  function setMessage(text,sub=''){
+    message.innerHTML=text+(sub?'<small>'+sub+'</small>':'');
+  }
+  function resetBat(){
+    bat.style.top='40%';
+    bat.style.transform='rotate(0deg)';
+  }
+  function startGame(){
+    gameState='play'; score=0; velocity=0; spawnTimer=0; scoreVal.textContent='0'; clearPipes(); resetBat(); setMessage(''); last=performance.now();
+  }
+  function gameOver(){
+    if(gameState!=='play') return;
+    gameState='start'; velocity=0;
+    setMessage('The bat flew into the moonlight...','Press Enter To Fly Again');
+  }
+  function createPipe(){
+    const h=game.clientHeight;
+    const gap=Math.max(145,Math.min(175,h*.25));
+    const maxTop=Math.max(70,h-gap-110);
+    const topHeight=70+Math.random()*Math.max(20,maxTop-70);
+    const bottomHeight=Math.max(40,h-topHeight-gap);
+    const top=document.createElement('div'); top.className='cd-bat-pipe'; top.style.height=topHeight+'px'; top.style.left='100%'; top.style.top='0';
+    const bottom=document.createElement('div'); bottom.className='cd-bat-pipe'; bottom.style.height=bottomHeight+'px'; bottom.style.left='100%'; bottom.style.top=(topHeight+gap)+'px';
+    game.append(top,bottom);
+    pipes.push({element:top,scored:false,pair:true},{element:bottom,scored:false,pair:false});
+  }
+  function flap(){
+    if(gameState==='start'){startGame();return;}
+    velocity=flapPower;
+  }
+  function collide(a,b){return a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top}
+  function tick(now){
+    const dt=Math.min(.035,(now-last)/1000||.02); last=now;
+    if(gameState==='play'){
+      velocity+=gravity*dt*50;
+      const nextTop=bat.offsetTop+velocity*dt*50;
+      bat.style.top=nextTop+'px';
+      bat.style.transform='rotate('+Math.max(-25,Math.min(55,velocity*2.2))+'deg)';
+      spawnTimer+=dt;
+      if(spawnTimer>=1.65){spawnTimer=0;createPipe();}
+      const br=bat.getBoundingClientRect();
+      const gr=game.getBoundingClientRect();
+      for(const p of pipes){
+        p.element.style.left=(p.element.offsetLeft-3.2)+'px';
+        if(p.pair&&!p.scored&&p.element.offsetLeft+p.element.offsetWidth<br.left-gr.left){p.scored=true;score++;scoreVal.textContent=score;}
+        if(collide(br,p.element.getBoundingClientRect())){gameOver();break;}
+        if(p.element.offsetLeft<-80)p.element.remove();
+      }
+      pipes=pipes.filter(p=>p.element.isConnected);
+      const localTop=bat.offsetTop;
+      if(localTop<0||localTop+bat.offsetHeight>game.clientHeight-25) gameOver();
+    }
+    requestAnimationFrame(tick);
+  }
+  function openGame(){modal.classList.add('show');modal.setAttribute('aria-hidden','false');gameState='start';score=0;scoreVal.textContent='0';clearPipes();resetBat();setMessage('Press Enter To Start');}
+  function closeGame(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');gameState='start';velocity=0;clearPipes();}
+  open.addEventListener('click',openGame);
+  close.addEventListener('click',closeGame);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeGame();});
+  document.addEventListener('keydown',e=>{
+    if(!modal.classList.contains('show')) return;
+    if(e.key==='Escape'){closeGame();return;}
+    if(e.key==='Enter'){if(gameState!=='play')startGame();return;}
+    if(e.key===' '){e.preventDefault();if(gameState==='play')flap();}
+  });
+  game.addEventListener('pointerdown',e=>{e.preventDefault();if(gameState==='play')flap();else startGame();});
+  requestAnimationFrame(tick);
+})();
+</script>
+
 </body>
 </html>

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://thecollectivedesigns.co.za/sitemap.xml
