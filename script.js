@@ -34,9 +34,10 @@ const openProductPreview = btn => {
 };
 
 const closeModal = () => {
-  if (!modal) return;
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
+  const modalToClose = document.querySelector('.modal.open');
+  if (!modalToClose) return;
+  modalToClose.classList.remove('open');
+  modalToClose.setAttribute('aria-hidden', 'true');
 };
 
 document.querySelectorAll('[data-product]').forEach(btn => {
@@ -56,7 +57,17 @@ document.querySelectorAll('.product-art[role="button"]').forEach(art => {
   });
 });
 
-document.querySelector('.modal-close')?.addEventListener('click', closeModal);
+document.querySelectorAll('.modal-close').forEach(button => {
+  button.addEventListener('click', () => {
+    const dialog = button.closest('.modal');
+    if (dialog) {
+      dialog.classList.remove('open');
+      dialog.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    closeModal();
+  });
+});
 modal?.addEventListener('click', e => {
   if (e.target === modal) closeModal();
 });
