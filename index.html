@@ -636,25 +636,42 @@
 
 .cd-word-list {
 
-  display: flex;
+  position: sticky;
 
-  flex-wrap: wrap;
+  top: 0;
 
-  justify-content: center;
+  z-index: 10;
 
-  gap: 7px;
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(68px, 1fr));
+
+  max-width: 560px;
+
+  gap: 6px;
 
   margin:
     0
     auto
     18px;
+
+  padding: 6px;
+
+  border-radius: 12px;
+
+  background: rgba(255, 250, 244, 0.96);
+
+  box-shadow: 0 4px 12px rgba(60, 38, 55, 0.08);
 }
 
 .cd-word {
 
+  box-sizing: border-box;
+
   padding:
     6px
-    10px;
+    4px;
 
   border:
     1px solid rgba(104,70,94,0.18);
@@ -666,9 +683,13 @@
 
   color: #654b60;
 
-  font-size: 11px;
+  font-size: clamp(9px, 1.5vw, 11px);
 
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
+
+  text-align: center;
+
+  white-space: nowrap;
 
   transition: all 0.25s ease;
 }
@@ -1281,6 +1302,44 @@
   display: block;
 }
 
+#cdPrizeScreen.reward-revealed .cd-prize-subtitle {
+
+  display: none;
+}
+
+#cdPrizeScreen.reward-revealed .cd-wheel-area {
+
+  width: min(230px, 56vw);
+
+  height: min(230px, 56vw);
+
+  margin: 8px auto 10px;
+}
+
+#cdPrizeScreen.reward-revealed #cdPrizeResult {
+
+  margin-top: 12px;
+
+  padding: 14px;
+}
+
+#cdPrizeScreen.reward-revealed .cd-result-note {
+
+  margin-top: 8px;
+
+  line-height: 1.35;
+}
+
+#cdContinueGame {
+
+  display: none;
+}
+
+#cdPrizeScreen.reward-revealed #cdContinueGame {
+
+  display: inline-flex;
+}
+
 .cd-result-small {
 
   color: #806b79;
@@ -1491,6 +1550,8 @@
   }
 
   #cdWordBoard {
+    width: min(100%, max(190px, calc(100vh - 430px)));
+    width: min(100%, max(190px, calc(100dvh - 430px)));
     gap: 2px;
   }
 
@@ -1866,6 +1927,14 @@
         class="cd-game-actions"
         style="margin-top:20px;"
       >
+
+        <button
+          type="button"
+          id="cdContinueGame"
+          class="cd-game-button"
+        >
+          Continue to Next Puzzle
+        </button>
 
         <button
           type="button"
@@ -2439,6 +2508,11 @@
       "cdPrizeClose"
     );
 
+  const continueGameButton =
+    document.getElementById(
+      "cdContinueGame"
+    );
+
   const newGameButton =
     document.getElementById(
       "cdNewGame"
@@ -2534,6 +2608,13 @@
     "ENCHANT", "REST", "SLEEP", "SOFT", "WISH", "WONDER", "WILDFLOWER",
     "MOONBEAM", "FIREFLY", "BUTTERFLY", "CANDLE", "HEART", "HOME"
   ];
+
+  const ROUND_WORD_BANK =
+    WORD_BANK.filter(
+      function (word) {
+        return word.length >= 4 && word.length <= 8;
+      }
+    );
 
   let WORDS = [];
 
@@ -2705,6 +2786,14 @@
     closeGame
   );
 
+  continueGameButton.addEventListener(
+    "click",
+    function () {
+      showWordSearch();
+      newGame();
+    }
+  );
+
 
   overlay.addEventListener(
     "click",
@@ -2752,6 +2841,10 @@
 
     prizeScreen.classList.remove(
       "show"
+    );
+
+    prizeScreen.classList.remove(
+      "reward-revealed"
     );
 
   }
@@ -2841,7 +2934,7 @@
 
     /* There are vastly more possible combinations than we need. */
     for (let attempt = 0; attempt < 100; attempt++) {
-      selected = shuffleArray(WORD_BANK).slice(0, 7);
+      selected = shuffleArray(ROUND_WORD_BANK).slice(0, 7);
       signature = [...selected].sort().join("|");
       if (!used.has(signature)) break;
     }
@@ -3788,6 +3881,10 @@
       "show"
     );
 
+    prizeScreen.classList.remove(
+      "reward-revealed"
+    );
+
 
     spinButton.disabled =
       false;
@@ -4058,6 +4155,10 @@
 
     prizeResult.classList.add(
       "show"
+    );
+
+    prizeScreen.classList.add(
+      "reward-revealed"
     );
 
     /* The one-time reward is now permanently claimed on this browser. */
@@ -5026,7 +5127,7 @@ const cdColouringPages = ["data:image/webp;base64,UklGRj7TAABXRUJQVlA4IDLTAABQVQ
 #cdGameOverlay,#cdFlappyBatModal,.modal{z-index:1000000!important}
 #cdWordBoard{position:relative;display:grid!important;grid-template-columns:repeat(10,minmax(0,1fr))!important;grid-template-rows:repeat(10,minmax(0,1fr))!important;width:min(540px,100%)!important;aspect-ratio:1/1!important;gap:3px!important;touch-action:none!important;user-select:none!important;-webkit-user-select:none!important}
 #cdWordBoard .cd-letter{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;cursor:crosshair;touch-action:none}
-@media(max-width:600px){#cdWordBoard{gap:2px!important}}
+@media(max-width:600px){#cdWordBoard{width:min(100%,max(190px,calc(100dvh - 430px)))!important;gap:2px!important}}
 </style>
 
 </body>
