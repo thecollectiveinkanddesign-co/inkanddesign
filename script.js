@@ -36,7 +36,6 @@ if (year) year.textContent = new Date().getFullYear();
   'use strict';
 
   const PRODUCTS = {
-    'Midnight Dragon Tee': { category:'APPAREL', description:'Black cotton tee with the Midnight Dragon artwork.', price:null, currency:'ZAR', sizes:['XS','S','M','L','XL','2XL'], colors:['Black'], pod:'Printful' },
     'Moonlit Notes': { category:'STATIONERY', description:'Moonlit art cards, letter paper and envelopes.', price:null, currency:'ZAR', sizes:['One size'], colors:['Warm cream'], pod:'Printful' },
     'Hollow Art Print': { category:'PRINTS', description:'Gothic botanical archival art print.', price:null, currency:'ZAR', sizes:['A4'], colors:['Warm paper'], pod:'Printful' },
     'Night Garden Sticker Set': { category:'PAPER GOODS', description:'Six illustrated vinyl stickers from the Night Garden.', price:null, currency:'ZAR', sizes:['One size'], colors:['Mixed'], pod:'Printful' }
