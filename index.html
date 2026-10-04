@@ -2187,6 +2187,24 @@
 .cd-envelope.open + .cd-letter{opacity:1;transform:translate(-50%,-18px)}
 .cd-letter p{font:15px/1.65 Georgia,serif;color:#574453;margin:0}
 
+#cdWordBoard .cd-letter{
+  position: static;
+  width: auto;
+  padding: 0;
+  background: rgba(255,255,255,0.68);
+  border: 1px solid rgba(104,70,94,0.12);
+  border-radius: 5px;
+  box-shadow: none;
+  opacity: 1;
+  z-index: auto;
+  transform: none;
+  transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
+#cdWordBoard .cd-letter:hover{background:#f0e3dc}
+#cdWordBoard .cd-letter.selected{background:#b99caf;color:#fffdf8;transform:scale(1.04)}
+#cdWordBoard .cd-letter.found{background:#6e4b66;color:#fffaf5}
+
 /* Shimeji-style wandering cat — ordinary cat emoji, soft and playful */
 .cd-wandering-cat{
   position:fixed;left:0;top:0;z-index:99994;pointer-events:auto;cursor:pointer;
