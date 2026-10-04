@@ -25,14 +25,6 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="shop-preview.css">
 <style id="cd-colouring-garden-style">
-  .cd-colour-secret{
-    position:absolute; left:7%; bottom:10%; z-index:8;
-    width:38px;height:38px;border:0;border-radius:50%;
-    background:transparent;color:rgba(110,73,101,.58);
-    font:22px Georgia,serif; cursor:pointer; opacity:.42;
-    transition:opacity .25s ease,transform .25s ease;
-  }
-  .cd-colour-secret:hover{opacity:.95;transform:scale(1.08) rotate(-5deg)}
   .cd-colour-modal{position:fixed;inset:0;z-index:1000005;display:none;align-items:center;justify-content:center;
     padding:18px;background:rgba(20,15,21,.72);backdrop-filter:blur(7px)}
   .cd-colour-modal.show{display:flex}
@@ -1897,32 +1889,38 @@
    ========================================================= */
 :root{--cd-cream:#fbf4ea;--cd-plum:#68465f;--cd-plum-dark:#3e2a3c;--cd-mauve:#b99caf;--cd-gold:#d7b978}
 #cdGardenMagic{position:fixed;inset:0;z-index:99990;pointer-events:none;overflow:hidden}
-.cd-firefly{position:absolute;width:6px;height:6px;border-radius:50%;background:#f8e7a8;box-shadow:0 0 10px 3px rgba(248,231,168,.7);opacity:.65;animation:cdFloat 7s ease-in-out infinite;pointer-events:auto;cursor:pointer}
+.cd-firefly{position:absolute;width:5px;height:5px;border-radius:50%;background:#d9cba7;box-shadow:0 0 7px 2px rgba(217,203,167,.35);opacity:.42;animation:cdFloat 7s ease-in-out infinite;pointer-events:auto;cursor:pointer}
 @keyframes cdFloat{0%,100%{transform:translate(0,0);opacity:.25}50%{transform:translate(12px,-24px);opacity:.95}}
 .cd-firefly-message{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);background:rgba(255,250,243,.96);border:1px solid rgba(104,70,95,.2);border-radius:18px;padding:24px 28px;box-shadow:0 25px 70px rgba(30,20,30,.35);font:18px Georgia,serif;color:#4c3047;z-index:100002;text-align:center;opacity:0;pointer-events:none;transition:.35s ease}
 .cd-firefly-message.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
 .cd-firefly-message small{display:block;margin-top:8px;font:11px Montserrat,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#85617c}
-.cd-cursor-moth{position:fixed;z-index:99995;pointer-events:none;font-size:25px;color:#806078;filter:drop-shadow(0 3px 8px rgba(80,50,75,.2));opacity:0;transition:opacity .4s ease;will-change:transform}
+.cd-cursor-moth{position:fixed;z-index:99995;pointer-events:none;font-size:25px;color:#806078;filter:grayscale(.55) saturate(.45) drop-shadow(0 3px 8px rgba(80,50,75,.14));opacity:0;transition:opacity .4s ease;will-change:transform}
 .cd-candle{position:fixed;left:22px;bottom:20px;width:72px;height:112px;z-index:99992;pointer-events:auto;cursor:pointer;filter:drop-shadow(0 8px 14px rgba(30,20,25,.18))}
 .cd-candle .flame{position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:25px;border-radius:70% 40% 65% 40%;background:#e7b96b;box-shadow:0 0 18px 7px rgba(231,185,107,.35);animation:cdFlicker 1.1s ease-in-out infinite alternate}
 @keyframes cdFlicker{to{transform:translateX(-50%) scale(.86) rotate(3deg);opacity:.75}}
 .cd-candle .wax{position:absolute;left:18px;bottom:7px;width:36px;height:var(--cd-wax-height,72px);background:linear-gradient(90deg,#eadbc8,#fff7eb,#dfcfbc);border-radius:8px 8px 4px 4px;transition:height 1s ease}
 .cd-candle .wick{position:absolute;left:50%;bottom:calc(var(--cd-wax-height,72px) + 6px);width:2px;height:8px;background:#46363d;transform:translateX(-50%);transition:bottom 1s ease}
 .cd-candle .label{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font:8px Montserrat,sans-serif;letter-spacing:.12em;color:#68465f;white-space:nowrap}
-.cd-daily{position:fixed;right:20px;bottom:20px;width:min(310px,calc(100vw - 120px));z-index:99992;pointer-events:auto;background:rgba(255,250,243,.93);border:1px solid rgba(104,70,95,.16);border-radius:16px;padding:14px 16px;box-shadow:0 15px 40px rgba(40,25,40,.18);color:#4d3748;backdrop-filter:blur(8px)}
-.cd-daily .date{font:9px Montserrat,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#8b7184}.cd-daily p{margin:7px 0 0;font:16px/1.45 Georgia,serif}.cd-daily button{float:right;border:0;background:none;color:#806078;cursor:pointer;font-size:16px}
+.cd-daily{position:fixed;right:20px;bottom:20px;width:min(310px,calc(100vw - 120px));z-index:99992;pointer-events:auto;background:rgba(235,226,220,.9);border:1px solid rgba(104,70,95,.14);border-radius:14px;padding:14px 16px;box-shadow:0 12px 30px rgba(20,15,20,.16);color:#4d3748;backdrop-filter:blur(8px);opacity:0;transform:translateY(16px);visibility:hidden;transition:opacity .6s ease,transform .6s ease,visibility .6s}
+.cd-daily.show{opacity:1;transform:translateY(0);visibility:visible}.cd-daily .date{font:9px Montserrat,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#8b7184}.cd-daily p{margin:7px 0 0;font:16px/1.45 Georgia,serif}.cd-daily button{float:right;border:0;background:none;color:#806078;cursor:pointer;font-size:16px}
 .cd-made-love{position:fixed;left:50%;bottom:8px;transform:translateX(-50%);z-index:99991;pointer-events:auto;font:10px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(104,70,95,.35);cursor:pointer;padding:8px}.cd-made-love:hover{color:#68465f}
 .cd-token-host{position:relative}.cd-secret-token{position:absolute;z-index:30;width:24px;height:24px;border:0;background:transparent;color:#6f4d68;font-size:17px;cursor:pointer;opacity:.18;transition:.3s ease}.cd-secret-token:hover{opacity:.85;transform:scale(1.25) rotate(8deg)}.cd-secret-token.found{opacity:1;filter:drop-shadow(0 0 7px rgba(215,185,120,.8))}
 .cd-garden-section{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(245,235,226,.5),rgba(235,220,212,.35));border-top:1px solid rgba(104,70,95,.08);border-bottom:1px solid rgba(104,70,95,.08)}
-.cd-garden-map{position:relative;min-height:560px;max-width:1050px;margin:auto;border-radius:28px;background:radial-gradient(circle at 50% 25%,rgba(245,230,198,.28),transparent 28%),linear-gradient(160deg,#2c2330,#17131a);overflow:hidden;box-shadow:0 25px 60px rgba(30,20,30,.18)}
-.cd-map-path{position:absolute;border:2px dashed rgba(233,214,182,.2);border-radius:50%;pointer-events:none}.cd-map-path.p1{inset:70px 140px}.cd-map-path.p2{inset:150px 280px}.cd-map-star{position:absolute;color:#e9d8ae;opacity:.7;font-size:12px;animation:cdTwinkle 2.5s ease-in-out infinite alternate}@keyframes cdTwinkle{to{opacity:.25;transform:scale(.7)}}
-.cd-map-place{position:absolute;z-index:2;color:#fbf3e7;text-align:center;cursor:pointer;transition:.25s ease}.cd-map-place:hover{transform:translateY(-4px) scale(1.03)}.cd-map-place .icon{font-size:34px;display:block;margin-bottom:7px}.cd-map-place b{font:11px Montserrat,sans-serif;letter-spacing:.13em;text-transform:uppercase}.cd-map-place small{display:block;margin-top:4px;color:#cdbdc8;font:12px Georgia,serif}.cd-map-place.moon{left:8%;top:16%}.cd-map-place.moth{right:9%;top:23%}.cd-map-place.flower{left:11%;bottom:18%}.cd-map-place.postbox{right:12%;bottom:20%}.cd-map-place.clearing{left:50%;top:43%;transform:translate(-50%,-50%)}.cd-map-place.clearing:hover{transform:translate(-50%,-54%) scale(1.03)}.cd-map-place.shop{left:50%;bottom:10%;transform:translateX(-50%)}.cd-map-place.shop:hover{transform:translateX(-50%) translateY(-4px) scale(1.03)}
+.cd-garden-map{position:relative;min-height:740px;width:min(100%,1320px);margin:auto;border-radius:28px;background:radial-gradient(ellipse at 52% 45%,rgba(106,83,100,.2),transparent 48%),radial-gradient(circle at 15% 18%,rgba(190,160,135,.09),transparent 25%),linear-gradient(160deg,#2c2330,#17131a);overflow:hidden;box-shadow:0 25px 60px rgba(30,20,30,.18)}
+.cd-map-path{position:absolute;border:1px dashed rgba(207,187,192,.14);border-radius:50%;pointer-events:none}.cd-map-path.p1{inset:70px 100px}.cd-map-path.p2{inset:170px 270px}.cd-map-star{position:absolute;color:#d4c8b5;opacity:.4;font-size:11px;animation:cdTwinkle 2.5s ease-in-out infinite alternate}@keyframes cdTwinkle{to{opacity:.2;transform:scale(.7)}}
+.cd-map-place{position:absolute;z-index:2;appearance:none;border:0;background:transparent;padding:10px;color:#e6dcd4;text-align:center;cursor:pointer;transition:color .25s ease,transform .25s ease}.cd-map-place:hover{color:#f1e9df;transform:translateY(-4px) scale(1.03)}.cd-map-place .icon{font-size:31px;display:block;margin-bottom:7px;color:#bba5ad;opacity:.72;filter:saturate(.35)}.cd-map-place b{font:11px Montserrat,sans-serif;letter-spacing:.13em;text-transform:uppercase}.cd-map-place small{display:block;margin-top:4px;color:#b8abb2;font:12px Georgia,serif}.cd-map-place.moon{left:7%;top:11%}.cd-map-place.moth{right:5%;top:17%}.cd-map-place.flower{left:13%;bottom:10%}.cd-map-place.postbox{right:12%;bottom:9%}.cd-map-place.clearing{left:50%;top:49%;transform:translate(-50%,-50%)}.cd-map-place.clearing:hover{transform:translate(-50%,-54%) scale(1.03)}.cd-map-place.shop{left:51%;bottom:3%;transform:translateX(-50%)}.cd-map-place.shop:hover{transform:translateX(-50%) translateY(-4px) scale(1.03)}
+.cd-garden-flower{position:absolute;z-index:3;border:0;background:transparent;color:#b69aa9;font:30px/1 Georgia,serif;opacity:.68;cursor:pointer;filter:saturate(.45);transition:transform .35s ease,color .35s ease,opacity .35s ease;text-shadow:0 2px 10px rgba(10,7,12,.3)}.cd-garden-flower:hover{opacity:.92;transform:scale(1.12)}.cd-garden-flower.bloomed{color:#d5b6b9;opacity:.9;transform:scale(1.22) rotate(12deg);text-shadow:0 0 14px rgba(193,155,172,.3)}.cd-garden-flower.f1{left:28%;top:15%}.cd-garden-flower.f2{left:43%;top:20%;font-size:24px}.cd-garden-flower.f3{right:28%;top:32%;font-size:36px}.cd-garden-flower.f4{left:24%;bottom:30%;font-size:26px}.cd-garden-flower.f5{right:29%;bottom:25%;font-size:28px}.cd-garden-flower.f6{left:62%;bottom:14%;font-size:22px}
+.cd-map-place.flower.bloomed .icon{color:#d5b6b9;opacity:.95;transform:scale(1.2);transition:transform .35s ease,color .35s ease}
+.cd-butterfly{position:absolute;z-index:3;left:50%;top:50%;pointer-events:none;font-size:21px;color:#ad99a9;opacity:.55;filter:grayscale(.45) saturate(.5);will-change:transform;transition:opacity .5s ease}
+.cd-butterfly.small{font-size:17px;opacity:.42}.cd-butterfly.tiny{font-size:14px;opacity:.35}
 .cd-bloom{opacity:0;transform:translateY(20px) scale(.8);transition:opacity .9s ease,transform .9s ease}.cd-bloom.cd-bloomed{opacity:1;transform:none}.cd-bloom::after{content:'✿';display:inline-block;margin-left:8px;color:#85617c;animation:cdBloom 1.5s ease}@keyframes cdBloom{from{transform:rotate(-25deg) scale(.5)}to{transform:rotate(0) scale(1)}}
-.cd-drawn{position:fixed;inset:0;background:rgba(35,25,35,.76);z-index:100000;display:none;align-items:center;justify-content:center;padding:20px}.cd-drawn.show{display:flex}.cd-drawn-card{width:min(650px,100%);background:#fff9f1;border-radius:22px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.4);color:#4c3047;text-align:center}.cd-drawn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}.cd-drawn-choice{border:1px solid rgba(104,70,95,.18);background:#f6ebe4;border-radius:14px;padding:18px 8px;font:14px Georgia,serif;color:#5b4055;cursor:pointer}.cd-drawn-choice span{display:block;font-size:28px;margin-bottom:7px}.cd-drawn-result{margin-top:18px;font:18px/1.5 Georgia,serif;display:none}.cd-drawn-result.show{display:block}
+.cd-drawn{position:fixed;inset:0;background:rgba(35,25,35,.76);z-index:100000;display:none;align-items:center;justify-content:center;padding:20px}.cd-drawn.show{display:flex}.cd-drawn-card{width:min(650px,100%);background:#fff9f1;border-radius:22px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.4);color:#4c3047;text-align:center}.cd-drawn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}.cd-drawn-choice{border:1px solid rgba(104,70,95,.18);background:#f6ebe4;border-radius:14px;padding:18px 8px;font:14px Georgia,serif;color:#5b4055;cursor:pointer}.cd-drawn-choice span{display:block;font-size:28px;margin-bottom:7px;filter:grayscale(.55) saturate(.45);opacity:.8}.cd-drawn-result{margin-top:18px;font:18px/1.5 Georgia,serif;display:none}.cd-drawn-result.show{display:block}
 .cd-collectible-reward{position:fixed;inset:0;z-index:100001;background:rgba(35,25,35,.8);display:none;align-items:center;justify-content:center;padding:20px}.cd-collectible-reward.show{display:flex}.cd-reward-card{width:min(560px,100%);background:#fff9f1;border-radius:22px;padding:32px;text-align:center;color:#4c3047;box-shadow:0 30px 80px rgba(0,0,0,.4)}.cd-reward-card h3{font:32px Georgia,serif;margin:0 0 10px}.cd-reward-code{display:inline-block;margin:15px 0;padding:10px 15px;border-radius:10px;background:#eee0d8;color:#68465f;font:14px Montserrat,sans-serif;letter-spacing:.1em}
-.cd-cat{position:absolute;right:7%;top:55%;font-size:36px;cursor:pointer;z-index:4;transition:.3s ease}.cd-cat:hover{transform:translateY(-6px) rotate(-4deg)}
+.cd-cat{position:absolute;left:66%;top:59%;z-index:4;border:0;background:transparent;padding:8px;font-size:34px;cursor:pointer;filter:grayscale(.65) saturate(.45);opacity:.82;transition:left 3.2s ease-in-out,top 3.2s ease-in-out,transform .5s ease,opacity .5s ease}.cd-cat.facing-left{scale:-1 1}.cd-cat.walking{animation:cdCatWalk .55s ease-in-out infinite alternate}.cd-cat.sitting{transform:scale(.92) translateY(4px)}.cd-cat.sleeping{transform:scale(.88) rotate(-10deg);opacity:.62}.cd-cat.sleeping::after{content:'z z';position:absolute;top:-6px;right:-14px;font:12px Georgia,serif;color:#b8a5b4;opacity:.8}@keyframes cdCatWalk{to{translate:0 -3px;rotate:2deg}}
+.cd-envelope-layer{position:fixed;inset:0;z-index:100004;display:grid;place-items:center;background:rgba(18,13,20,.42);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s}.cd-envelope-layer.show{opacity:1;visibility:visible}.cd-falling-envelope{position:absolute;left:50%;top:-70px;z-index:1;color:#d2c3bb;font:52px Georgia,serif;opacity:0;filter:grayscale(.5)}.cd-envelope-layer.show .cd-falling-envelope{animation:cdEnvelopeDrop 1s ease-in forwards}@keyframes cdEnvelopeDrop{0%{top:-70px;opacity:0;transform:translateX(-50%) rotate(-12deg)}15%{opacity:.9}75%{top:calc(50% - 50px)}100%{top:calc(50% - 50px);opacity:0;transform:translateX(-50%) rotate(4deg) scale(.7)}}.cd-falling-note{position:relative;width:min(380px,calc(100vw - 36px));min-height:220px;padding:34px 28px 26px;border:1px solid rgba(94,70,83,.2);border-radius:12px;background:#e8ded5;color:#4d3d48;text-align:center;box-shadow:0 18px 54px rgba(0,0,0,.3);opacity:0;transform:translateY(14px);transition:opacity .35s ease .7s,transform .45s ease .7s}.cd-envelope-layer.show .cd-falling-note{opacity:1;transform:translateY(0)}.cd-falling-note h3{margin:0 0 10px;font:italic 27px Georgia,serif}.cd-falling-note p{margin:0;font:16px/1.6 Georgia,serif}.cd-falling-note button{position:absolute;right:10px;top:8px;border:0;background:transparent;color:#60495a;font-size:23px;cursor:pointer}
 .cd-mini-note{font:12px/1.5 Georgia,serif;color:#806b79;margin-top:8px}
-@media(max-width:700px){.cd-daily{right:12px;bottom:12px;width:230px}.cd-candle{left:10px;bottom:12px;transform:scale(.82);transform-origin:bottom left}.cd-garden-map{min-height:520px}.cd-map-place .icon{font-size:28px}.cd-map-place b{font-size:9px}.cd-map-place small{font-size:10px}.cd-drawn-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.cd-daily{right:12px;bottom:12px;width:230px}.cd-candle{left:10px;bottom:12px;transform:scale(.82);transform-origin:bottom left}.cd-garden-map{min-height:680px}.cd-map-place .icon{font-size:26px}.cd-map-place b{font-size:9px}.cd-map-place small{font-size:10px}.cd-map-place.moon{left:1%;top:7%}.cd-map-place.moth{right:0;top:17%}.cd-map-place.flower{left:1%;bottom:8%}.cd-map-place.postbox{right:0;bottom:9%}.cd-map-place.shop{bottom:1%}.cd-map-place.clearing{top:47%}.cd-garden-flower.f1{left:34%;top:12%}.cd-garden-flower.f2{left:57%;top:22%}.cd-garden-flower.f3{right:22%;top:39%}.cd-garden-flower.f4{left:25%;bottom:31%}.cd-garden-flower.f5{right:25%;bottom:25%}.cd-garden-flower.f6{left:67%;bottom:14%}.cd-drawn-grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){.cd-daily,.cd-cat,.cd-garden-flower,.cd-envelope-layer,.cd-falling-note{transition:none!important}.cd-cat.walking{animation:none}.cd-envelope-layer.show .cd-falling-envelope{animation:none;opacity:0}.cd-map-star{animation:none}}
 </style>
 
 <!-- =========================================================
@@ -1932,7 +1930,7 @@
 <div class="cd-cursor-moth" id="cdCursorMoth">🦋</div>
 <div class="cd-firefly-message" id="cdFireflyMessage"><span>“The garden noticed you.”</span><small>✦ a little light was waiting</small></div>
 <div class="cd-candle" id="cdGardenCandle" title="The garden has been burning this candle all day."><span class="flame"></span><span class="wick"></span><span class="wax"></span><span class="label">GARDEN CANDLE</span></div>
-<div class="cd-daily" id="cdDaily"><button id="cdDailyClose" aria-label="Hide today's message">×</button><div class="date" id="cdDailyDate"></div><p id="cdDailyText"></p></div>
+<div class="cd-daily" id="cdDaily" role="status" aria-live="polite"><button id="cdDailyClose" aria-label="Hide today's message">×</button><div class="date" id="cdDailyDate">A NOTE FOR YOU</div><p id="cdDailyText"></p></div>
 <button class="cd-made-love" id="cdMadeLove" aria-label="A hidden made with love message">made with love</button>
 
 <section class="section cd-garden-section" id="night-garden">
@@ -1940,17 +1938,34 @@
   <div class="cd-garden-map" id="cdGardenMap">
     <div class="cd-map-path p1"></div><div class="cd-map-path p2"></div>
     <span class="cd-map-star" style="left:18%;top:18%">✦</span><span class="cd-map-star" style="left:72%;top:12%">✧</span><span class="cd-map-star" style="left:83%;top:48%">✦</span><span class="cd-map-star" style="left:28%;top:75%">✧</span><span class="cd-map-star" style="left:62%;top:78%">✦</span>
-    <button class="cd-map-place moon" data-scroll="top"><span class="icon">🌙</span><b>Moonlit Path</b><small>watch the moon</small></button>
-    <button class="cd-map-place moth" data-drawn="moth"><span class="icon">🦋</span><b>Moth House</b><small>what calls to you?</small></button>
-    <button class="cd-map-place flower" data-scroll="work"><span class="icon">🌿</span><b>Wildflower Corner</b><small>watch things bloom</small></button>
-    <button class="cd-map-place postbox" id="cdPostbox"><span class="icon">✉️</span><b>Postbox</b><small>a message for you</small></button>
-    <button class="cd-map-place clearing" id="cdClearing"><span class="icon">🔮</span><b>Secret Clearing</b><small>something is waiting</small></button>
-    <button class="cd-map-place shop" data-scroll="shop"><span class="icon">🏡</span><b>The Little Shop</b><small>take something home</small></button>
+    <button class="cd-map-place moon" data-scroll="top"><span class="icon">☾</span><b>Moonlit Path</b><small>watch the moon</small></button>
+    <button class="cd-map-place moth" data-drawn="moth"><span class="icon">༄</span><b>Moth House</b><small>what calls to you?</small></button>
+    <button class="cd-map-place flower" data-flower aria-label="Wildflower Corner. Tap to bloom; tap three times to open the coloring page."><span class="icon">❀</span><b>Wildflower Corner</b><small>tap once to bloom · three times to colour</small></button>
+    <button class="cd-map-place postbox" id="cdPostbox"><span class="icon">✉</span><b>Postbox</b><small>a message for you</small></button>
+    <button class="cd-map-place clearing" id="cdClearing"><span class="icon">◇</span><b>Secret Clearing</b><small>something is waiting</small></button>
+    <button class="cd-map-place shop" data-scroll="shop"><span class="icon">⌂</span><b>The Little Shop</b><small>take something home</small></button>
+    <button class="cd-garden-flower f1" type="button" data-flower aria-label="Moonflower. Tap to bloom; tap three times to colour.">✿</button>
+    <button class="cd-garden-flower f2" type="button" data-flower aria-label="Night flower. Tap to bloom; tap three times to colour.">❁</button>
+    <button class="cd-garden-flower f3" type="button" data-flower aria-label="Wild rose. Tap to bloom; tap three times to colour.">✾</button>
+    <button class="cd-garden-flower f4" type="button" data-flower aria-label="Little flower. Tap to bloom; tap three times to colour.">❀</button>
+    <button class="cd-garden-flower f5" type="button" data-flower aria-label="Evening flower. Tap to bloom; tap three times to colour.">✿</button>
+    <button class="cd-garden-flower f6" type="button" data-flower aria-label="Garden flower. Tap to bloom; tap three times to colour.">❁</button>
+    <span class="cd-butterfly" aria-hidden="true">🦋</span>
+    <span class="cd-butterfly small" aria-hidden="true">🦋</span>
+    <span class="cd-butterfly tiny" aria-hidden="true">🦋</span>
     <button class="cd-cat" id="cdGardenCat" aria-label="Garden cat">🐈‍⬛</button>
-    <button class="cd-colour-secret" id="cdColourSecret" type="button" aria-label="A quiet colouring corner" title="A quiet little corner">✿</button>
   </div>
   <p class="cd-mini-note" style="text-align:center">There are five little symbols hidden around the garden. Find them all.</p>
 </section>
+
+<div class="cd-envelope-layer" id="cdEnvelopeLayer" aria-hidden="true">
+  <span class="cd-falling-envelope" aria-hidden="true">✉</span>
+  <article class="cd-falling-note" role="dialog" aria-modal="true" aria-labelledby="cdLetterTitle">
+    <button type="button" id="cdLetterClose" aria-label="Close letter">×</button>
+    <h3 id="cdLetterTitle">A message for you</h3>
+    <p>You were always meant to find this place. May something gentle find its way to you today, too.</p>
+  </article>
+</div>
 
 <div class="cd-drawn" id="cdDrawn"><div class="cd-drawn-card"><button class="modal-close" id="cdDrawnClose" aria-label="Close">×</button><p class="kicker">THE GARDEN ASKS</p><h2>What are you drawn to?</h2><p>Don't think too hard. Choose the thing your eye went to first.</p><div class="cd-drawn-grid"><button class="cd-drawn-choice" data-choice="moon"><span>🌙</span>Moon</button><button class="cd-drawn-choice" data-choice="moth"><span>🦋</span>Moth</button><button class="cd-drawn-choice" data-choice="garden"><span>🌿</span>Garden</button><button class="cd-drawn-choice" data-choice="star"><span>⭐</span>Star</button></div><div class="cd-drawn-result" id="cdDrawnResult"></div></div></div>
 <div class="cd-collectible-reward" id="cdCollectibleReward"><div class="cd-reward-card"><p class="kicker">THE GARDEN REMEMBERS</p><h3>You found all five.</h3><p>The moon, the moth, the leaf, the key and the star were all waiting for you.</p><p>Your reward is a <strong>free digital design</strong> from The Collective Designs.</p><div class="cd-reward-code" id="cdGardenRewardCode"></div><p class="cd-mini-note">Keep this code and email it to the studio when you're ready to claim your design.</p><button class="cd-game-button" id="cdRewardClose">Keep exploring</button></div></div>
@@ -3735,10 +3750,11 @@
   const dailyText = $('cdDailyText');
   if(daily && dailyDate && dailyText){
     const d = new Date();
-    dailyDate.textContent = d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+    dailyDate.textContent = 'A NOTE FOR YOU · ' + d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
     dailyText.textContent = dailyMessage().text;
     const close = $('cdDailyClose');
-    if(close) close.addEventListener('click',()=>daily.remove());
+    if(close) close.addEventListener('click',()=>daily.classList.remove('show'));
+    window.setTimeout(()=>daily.classList.add('show'),900);
   }
 
   // Real lunar phase using a known new moon and the synodic cycle.
@@ -3806,14 +3822,113 @@
   $('cdDrawnClose')?.addEventListener('click',()=>drawn?.classList.remove('show'));
   document.querySelectorAll('[data-drawn]').forEach(btn=>btn.addEventListener('click',()=>drawn?.classList.add('show')));
 
+  // Butterflies drift toward pointer or device-orientation movement.
+  const gardenMap=$('cdGardenMap');
+  const butterflies=gardenMap?.querySelectorAll('.cd-butterfly')||[];
+  if(gardenMap&&butterflies.length){
+    let targetX=0,targetY=0;
+    const butterflyOffsets=[[-44,-24],[38,-2],[4,38]];
+    const handleDeviceOrientation=event=>{
+      if(event.gamma===null||event.beta===null) return;
+      targetX=Math.max(-gardenMap.clientWidth*.38,Math.min(gardenMap.clientWidth*.38,event.gamma*5));
+      targetY=Math.max(-gardenMap.clientHeight*.38,Math.min(gardenMap.clientHeight*.38,event.beta*3));
+      updateButterflies();
+    };
+    const updateButterflies=()=>{
+      butterflies.forEach((butterfly,index)=>{
+        const [offsetX,offsetY]=butterflyOffsets[index];
+        butterfly.style.transform=`translate3d(${targetX+offsetX}px,${targetY+offsetY}px,0)`;
+      });
+    };
+    gardenMap.addEventListener('pointermove',event=>{
+      if(event.pointerType==='touch') return;
+      const bounds=gardenMap.getBoundingClientRect();
+      targetX=event.clientX-bounds.left-bounds.width/2;
+      targetY=event.clientY-bounds.top-bounds.height/2;
+      updateButterflies();
+    },{passive:true});
+    let sensorPermissionRequested=false;
+    gardenMap.addEventListener('pointerdown',()=>{
+      if(sensorPermissionRequested) return;
+      sensorPermissionRequested=true;
+      const orientationPermission=window.DeviceOrientationEvent?.requestPermission;
+      if(typeof orientationPermission==='function'){
+        orientationPermission.call(window.DeviceOrientationEvent).then(permission=>{
+          if(permission==='granted') window.addEventListener('deviceorientation',handleDeviceOrientation,{passive:true});
+        }).catch(error=>console.warn('Garden motion sensor permission was not granted.',error));
+      } else if('DeviceOrientationEvent' in window){
+        window.addEventListener('deviceorientation',handleDeviceOrientation,{passive:true});
+      }
+    },{passive:true});
+  }
+
+  // Flowers bloom on the first tap and open the colouring page on a triple tap.
+  const flowerTapCounts=new WeakMap();
+  document.querySelectorAll('[data-flower]').forEach(flower=>{
+    flower.addEventListener('click',()=>{
+      flower.classList.add('bloomed');
+      const state=flowerTapCounts.get(flower)||{count:0,timer:0};
+      window.clearTimeout(state.timer);
+      state.count+=1;
+      if(state.count>=3){
+        state.count=0;
+        document.dispatchEvent(new Event('cd:open-colouring'));
+      } else {
+        state.timer=window.setTimeout(()=>{state.count=0;},1800);
+      }
+      flowerTapCounts.set(flower,state);
+    });
+  });
+
   // Garden map navigation.
   document.querySelectorAll('[data-scroll]').forEach(btn=>btn.addEventListener('click',()=>{
     const id=btn.dataset.scroll;
     const target=$(id);
     if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
   }));
-  $('cdPostbox')?.addEventListener('click',()=>alert('You were always meant to find this place.'));
-  $('cdGardenCat')?.addEventListener('click',()=>alert('The cat noticed you. The cat has decided not to comment.\n\nNo reward. Only judgment.'));
+  const envelopeLayer=$('cdEnvelopeLayer');
+  const closeLetter=()=>{
+    if(!envelopeLayer) return;
+    envelopeLayer.classList.remove('show');
+    envelopeLayer.setAttribute('aria-hidden','true');
+    $('cdPostbox')?.focus();
+  };
+  $('cdPostbox')?.addEventListener('click',()=>{
+    envelopeLayer?.classList.add('show');
+    envelopeLayer?.setAttribute('aria-hidden','false');
+    $('cdLetterClose')?.focus();
+  });
+  $('cdLetterClose')?.addEventListener('click',closeLetter);
+  envelopeLayer?.addEventListener('click',event=>{if(event.target===envelopeLayer) closeLetter();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&envelopeLayer?.classList.contains('show')) closeLetter();});
+  const gardenCat=$('cdGardenCat');
+  if(gardenCat){
+    const catPause=duration=>window.setTimeout(wanderCat,duration);
+    function wanderCat(){
+      gardenCat.classList.remove('walking','sitting','sleeping');
+      if(Math.random()<.72){
+        gardenCat.classList.add(Math.random()<.5?'sitting':'sleeping');
+        catPause(2600+Math.random()*4200);
+        return;
+      }
+      const x=8+Math.random()*82,y=16+Math.random()*67;
+      gardenCat.classList.add('walking');
+      gardenCat.style.left=x+'%';
+      gardenCat.style.top=y+'%';
+      gardenCat.classList.toggle('facing-left',x<45);
+      catPause(3200+Math.random()*1300);
+    }
+    window.setTimeout(wanderCat,1600);
+    gardenCat.addEventListener('click',()=>{
+      gardenCat.classList.remove('sleeping');
+      gardenCat.classList.add('sitting');
+      if(fireflyMessage){
+        fireflyMessage.querySelector('span').textContent='The cat has chosen this quiet moment to sit with you.';
+        fireflyMessage.classList.add('show');
+        window.setTimeout(()=>fireflyMessage.classList.remove('show'),2800);
+      }
+    });
+  }
   $('cdClearing')?.addEventListener('click',()=>$('collectiveDesignsSecret')?.click());
 
   // Bloom as the visitor scrolls.
@@ -3990,14 +4105,13 @@ const cdColouringPages = ["data:image/webp;base64,UklGRj7TAABXRUJQVlA4IDLTAABQVQ
 <script id="cd-colouring-garden-js">
 (function(){
   'use strict';
-  const secret=document.getElementById('cdColourSecret');
   const modal=document.getElementById('cdColourModal');
   const close=document.getElementById('cdColourClose');
   const fillCanvas=document.getElementById('cdColourFill');
   const lineCanvas=document.getElementById('cdColourLine');
   const tools=document.getElementById('cdColourTools');
   const reset=document.getElementById('cdColourReset');
-  if(!secret||!modal||!fillCanvas||!lineCanvas) return;
+  if(!modal||!fillCanvas||!lineCanvas) return;
 
   const palette=['#171219','#6b4562','#9a6b88','#c58fa8','#e8b8bd','#d9b86c','#d99168','#8fa78f','#8fa9b8','#b7a5c9','#f1d9a5','#f4eee5'];
   let colour=palette[1], image=null, maskCanvas=null, maskData=null, imageData=null;
@@ -4095,7 +4209,7 @@ const cdColouringPages = ["data:image/webp;base64,UklGRj7TAABXRUJQVlA4IDLTAABQVQ
     setup();
   }
   function shut(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');}
-  secret.addEventListener('click',open);
+  document.addEventListener('cd:open-colouring',open);
   close.addEventListener('click',shut);
   modal.addEventListener('click',e=>{if(e.target===modal) shut()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show')) shut()});
