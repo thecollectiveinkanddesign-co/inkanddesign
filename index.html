@@ -57,26 +57,26 @@ dex<!doctype html>
   @media(max-width:600px){.cd-colour-card{padding:12px}.cd-colour-top h2{font-size:26px}.cd-colour-work{padding:4px}}
 </style>
 
-<style id="cd-flappy-bat-css">
+<style id="cd-flappy-moth-css">
 /* ---------------------------------------------------------
    FLAPPY MOTH — quiet little moonlit arcade game inside the garden
    --------------------------------------------------------- */
-#cdFlappyBatScreen{display:none;text-align:center}
-#cdFlappyBatScreen.show{display:block}
-.cd-bat-header{max-width:620px;margin:0 auto 16px}
-.cd-bat-header h2{margin:0 0 8px}
-.cd-bat-header p{margin:0;opacity:.72}
-.cd-bat-wrap{position:relative;width:min(760px,100%);margin:18px auto 12px;border-radius:24px;overflow:hidden;background:rgba(39,28,42,.08);border:1px solid rgba(76,54,80,.12);box-shadow:0 16px 45px rgba(40,25,45,.08)}
-#cdFlappyBatCanvas{display:block;width:100%;height:auto;aspect-ratio:760/430;touch-action:none;cursor:pointer}
-.cd-bat-hud{position:absolute;left:18px;right:18px;top:14px;display:flex;justify-content:space-between;pointer-events:none;font-size:.82rem;letter-spacing:.04em;opacity:.72}
-.cd-bat-score{font-weight:700}
-.cd-bat-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;pointer-events:none}
-.cd-bat-panel{max-width:390px;padding:20px 22px;border-radius:20px;background:rgba(250,246,238,.88);backdrop-filter:blur(8px);box-shadow:0 15px 40px rgba(40,25,45,.12);pointer-events:auto}
-.cd-bat-panel h3{margin:0 0 8px;font-size:1.35rem}
-.cd-bat-panel p{margin:0 0 14px;line-height:1.5;opacity:.76}
-.cd-bat-button{border:1px solid rgba(76,54,80,.18);background:rgba(76,54,80,.08);color:inherit;border-radius:999px;padding:9px 15px;cursor:pointer;font:inherit}
-.cd-bat-button:hover{background:rgba(76,54,80,.13)}
-.cd-bat-tip{font-size:.82rem;opacity:.62;margin:7px 0 0}
+#cdFlappyMothScreen{display:none;text-align:center}
+#cdFlappyMothScreen.show{display:block}
+.cd-moth-header{max-width:620px;margin:0 auto 16px}
+.cd-moth-header h2{margin:0 0 8px}
+.cd-moth-header p{margin:0;opacity:.72}
+.cd-moth-wrap{position:relative;width:min(760px,100%);margin:18px auto 12px;border-radius:24px;overflow:hidden;background:rgba(39,28,42,.08);border:1px solid rgba(76,54,80,.12);box-shadow:0 16px 45px rgba(40,25,45,.08)}
+#cdFlappyMothCanvas{display:block;width:100%;height:auto;aspect-ratio:760/430;touch-action:none;cursor:pointer}
+.cd-moth-hud{position:absolute;left:18px;right:18px;top:14px;display:flex;justify-content:space-between;pointer-events:none;font-size:.82rem;letter-spacing:.04em;opacity:.72}
+.cd-moth-score{font-weight:700}
+.cd-moth-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;pointer-events:none}
+.cd-moth-panel{max-width:390px;padding:20px 22px;border-radius:20px;background:rgba(250,246,238,.88);backdrop-filter:blur(8px);box-shadow:0 15px 40px rgba(40,25,45,.12);pointer-events:auto}
+.cd-moth-panel h3{margin:0 0 8px;font-size:1.35rem}
+.cd-moth-panel p{margin:0 0 14px;line-height:1.5;opacity:.76}
+.cd-moth-button{border:1px solid rgba(76,54,80,.18);background:rgba(76,54,80,.08);color:inherit;border-radius:999px;padding:9px 15px;cursor:pointer;font:inherit}
+.cd-moth-button:hover{background:rgba(76,54,80,.13)}
+.cd-moth-tip{font-size:.82rem;opacity:.62;margin:7px 0 0}
 </style>
 
 </head>
@@ -1778,7 +1778,7 @@ dex<!doctype html>
 
         <button
           type="button"
-          id="cdOpenFlappyBat"
+          id="cdOpenFlappyMoth"
           class="cd-game-button secondary"
         >
           🦋 Flappy Moth
@@ -1811,32 +1811,32 @@ dex<!doctype html>
     <!-- =====================================================
          FLAPPY MOTH
          ===================================================== -->
-    <div id="cdFlappyBatScreen" aria-hidden="true">
-      <div class="cd-bat-header">
+    <div id="cdFlappyMothScreen" aria-hidden="true">
+      <div class="cd-moth-header">
         <div class="cd-game-eyebrow">Collective Designs · Moon Flight</div>
         <h2 class="cd-game-title">Flappy Moth</h2>
         <p>Keep the little moth in the moonlight. Tap, click or press Space to flutter.</p>
       </div>
 
-      <div class="cd-bat-wrap">
-        <canvas id="cdFlappyBatCanvas" width="760" height="430" aria-label="Flappy Moth game"></canvas>
-        <div class="cd-bat-hud">
-          <span class="cd-bat-score" id="cdBatScore">0</span>
-          <span>Best <strong id="cdBatBest">0</strong></span>
+      <div class="cd-moth-wrap">
+        <canvas id="cdFlappyMothCanvas" width="760" height="430" aria-label="Flappy Moth game"></canvas>
+        <div class="cd-moth-hud">
+          <span class="cd-moth-score" id="cdMothScore">0</span>
+          <span>Best <strong id="cdMothBest">0</strong></span>
         </div>
-        <div class="cd-bat-overlay" id="cdBatOverlay">
-          <div class="cd-bat-panel">
-            <h3 id="cdBatPanelTitle">✦ Flappy Moth ✦</h3>
-            <p id="cdBatPanelText">A tiny moonlit arcade game. Find your rhythm and see how far you can glide.</p>
-            <button type="button" class="cd-bat-button" id="cdBatStart">Start fluttering</button>
-            <div class="cd-bat-tip">Tap · click · or Space</div>
+        <div class="cd-moth-overlay" id="cdMothOverlay">
+          <div class="cd-moth-panel">
+            <h3 id="cdMothPanelTitle">✦ Flappy Moth ✦</h3>
+            <p id="cdMothPanelText">A tiny moonlit arcade game. Find your rhythm and see how far you can glide.</p>
+            <button type="button" class="cd-moth-button" id="cdMothStart">Start fluttering</button>
+            <div class="cd-moth-tip">Tap · click · or Space</div>
           </div>
         </div>
       </div>
 
       <div class="cd-game-actions">
-        <button type="button" id="cdBatBack" class="cd-game-button secondary">Back to Word Search</button>
-        <button type="button" id="cdBatReset" class="cd-game-button">New Flight</button>
+        <button type="button" id="cdMothBack" class="cd-game-button secondary">Back to Word Search</button>
+        <button type="button" id="cdMothReset" class="cd-game-button">New Flight</button>
       </div>
     </div>
 
@@ -2526,38 +2526,38 @@ dex<!doctype html>
       "cdWordSearchScreen"
     );
 
-  const flappyBatScreen =
-    document.getElementById("cdFlappyBatScreen");
+  const flappyMothScreen =
+    document.getElementById("cdFlappyMothScreen");
 
-  const openFlappyBatButton =
-    document.getElementById("cdOpenFlappyBat");
+  const openFlappyMothButton =
+    document.getElementById("cdOpenFlappyMoth");
 
-  const batCanvas =
-    document.getElementById("cdFlappyBatCanvas");
+  const mothCanvas =
+    document.getElementById("cdFlappyMothCanvas");
 
-  const batScoreDisplay =
-    document.getElementById("cdBatScore");
+  const mothScoreDisplay =
+    document.getElementById("cdMothScore");
 
-  const batBestDisplay =
-    document.getElementById("cdBatBest");
+  const mothBestDisplay =
+    document.getElementById("cdMothBest");
 
-  const batOverlay =
-    document.getElementById("cdBatOverlay");
+  const mothOverlay =
+    document.getElementById("cdMothOverlay");
 
-  const batPanelTitle =
-    document.getElementById("cdBatPanelTitle");
+  const mothPanelTitle =
+    document.getElementById("cdMothPanelTitle");
 
-  const batPanelText =
-    document.getElementById("cdBatPanelText");
+  const mothPanelText =
+    document.getElementById("cdMothPanelText");
 
-  const batStartButton =
-    document.getElementById("cdBatStart");
+  const mothStartButton =
+    document.getElementById("cdMothStart");
 
-  const batBackButton =
-    document.getElementById("cdBatBack");
+  const mothBackButton =
+    document.getElementById("cdMothBack");
 
-  const batResetButton =
-    document.getElementById("cdBatReset");
+  const mothResetButton =
+    document.getElementById("cdMothReset");
 
   const prizeScreen =
     document.getElementById(
@@ -2758,7 +2758,7 @@ dex<!doctype html>
       "";
 
     stopTimer();
-    stopFlappyBat();
+    stopFlappyMoth();
 
   }
 
@@ -2830,14 +2830,14 @@ dex<!doctype html>
 
     wordSearchScreen.style.display =
       "block";
-    flappyBatScreen.classList.remove("show");
-    flappyBatScreen.setAttribute("aria-hidden","true");
+    flappyMothScreen.classList.remove("show");
+    flappyMothScreen.setAttribute("aria-hidden","true");
 
     prizeScreen.classList.remove(
       "show"
     );
 
-    stopFlappyBat();
+    stopFlappyMoth();
 
   }
 
@@ -2846,87 +2846,87 @@ dex<!doctype html>
   /* =======================================================
      FLAPPY MOTH — endless little moonlit arcade game
      ======================================================= */
-  const batCtx = batCanvas.getContext("2d");
-  const BAT_BEST_KEY = "cdFlappyMothBest";
-  let batRAF = null;
-  let batRunning = false;
-  let batStarted = false;
-  let batLastTime = 0;
-  let batWorld = 0;
-  let batScore = 0;
-  let batBest = Number(localStorage.getItem(BAT_BEST_KEY) || localStorage.getItem("cdFlappyBatBest") || 0);
-  let bat = {x:145,y:215,vy:0,r:15};
-  let batPipes = [];
-  let batSpawn = 0;
+  const mothCtx = mothCanvas.getContext("2d");
+  const MOTH_BEST_KEY = "cdFlappyMothBest";
+  let mothRAF = null;
+  let mothRunning = false;
+  let mothStarted = false;
+  let mothLastTime = 0;
+  let mothWorld = 0;
+  let mothScore = 0;
+  let mothBest = Number(localStorage.getItem(MOTH_BEST_KEY) || localStorage.getItem("cdFlappyMothBest") || 0);
+  let moth = {x:145,y:215,vy:0,r:15};
+  let mothPipes = [];
+  let mothSpawn = 0;
 
-  batBestDisplay.textContent = String(batBest);
+  mothBestDisplay.textContent = String(mothBest);
 
-  function batResizeScale(){
-    const rect=batCanvas.getBoundingClientRect();
-    return {sx:batCanvas.width/rect.width,sy:batCanvas.height/rect.height};
+  function mothResizeScale(){
+    const rect=mothCanvas.getBoundingClientRect();
+    return {sx:mothCanvas.width/rect.width,sy:mothCanvas.height/rect.height};
   }
 
-  function resetBatScene(){
-    batRunning=false;
-    batStarted=false;
-    batLastTime=0;
-    batWorld=0;
-    batScore=0;
-    batSpawn=0;
+  function resetMothScene(){
+    mothRunning=false;
+    mothStarted=false;
+    mothLastTime=0;
+    mothWorld=0;
+    mothScore=0;
+    mothSpawn=0;
     bat={x:145,y:215,vy:0,r:15};
-    batPipes=[];
-    batScoreDisplay.textContent="0";
-    drawBatScene();
-    batPanelTitle.textContent="✦ Flappy Moth ✦";
-    batPanelText.textContent="A tiny moonlit arcade game. Find your rhythm and see how far you can glide.";
-    batStartButton.textContent="Start fluttering";
-    batOverlay.style.display="flex";
+    mothPipes=[];
+    mothScoreDisplay.textContent="0";
+    drawMothScene();
+    mothPanelTitle.textContent="✦ Flappy Moth ✦";
+    mothPanelText.textContent="A tiny moonlit arcade game. Find your rhythm and see how far you can glide.";
+    mothStartButton.textContent="Start fluttering";
+    mothOverlay.style.display="flex";
   }
 
-  function flapBat(){
-    if(!batStarted || !batRunning){
-      startBat();
+  function flapMoth(){
+    if(!mothStarted || !mothRunning){
+      startMoth();
       return;
     }
-    bat.vy=-6.6;
+    moth.vy=-6.6;
   }
 
-  function startBat(){
-    resetBatScene();
-    batStarted=true;
-    batRunning=true;
-    batOverlay.style.display="none";
-    bat.vy=-5.8;
-    batLastTime=performance.now();
-    cancelAnimationFrame(batRAF);
-    batRAF=requestAnimationFrame(batLoop);
+  function startMoth(){
+    resetMothScene();
+    mothStarted=true;
+    mothRunning=true;
+    mothOverlay.style.display="none";
+    moth.vy=-5.8;
+    mothLastTime=performance.now();
+    cancelAnimationFrame(mothRAF);
+    mothRAF=requestAnimationFrame(mothLoop);
   }
 
-  function stopFlappyBat(){
-    batRunning=false;
-    cancelAnimationFrame(batRAF);
-    batRAF=null;
+  function stopFlappyMoth(){
+    mothRunning=false;
+    cancelAnimationFrame(mothRAF);
+    mothRAF=null;
   }
 
-  function endBat(){
-    batRunning=false;
-    if(batScore>batBest){
-      batBest=batScore;
-      localStorage.setItem(BAT_BEST_KEY,String(batBest));
-      batBestDisplay.textContent=String(batBest);
+  function endMoth(){
+    mothRunning=false;
+    if(mothScore>mothBest){
+      mothBest=mothScore;
+      localStorage.setItem(MOTH_BEST_KEY,String(mothBest));
+      mothBestDisplay.textContent=String(mothBest);
     }
-    batPanelTitle.textContent=batScore>=10?"✦ The moth is impressed ✦":"✦ Back to the garden ✦";
-    batPanelText.textContent=`You glided through ${batScore} moonlit gates. Take a breath and try again whenever you like.`;
-    batStartButton.textContent="Fly again";
-    batOverlay.style.display="flex";
+    mothPanelTitle.textContent=mothScore>=10?"✦ The moth is impressed ✦":"✦ Back to the garden ✦";
+    mothPanelText.textContent=`You glided through ${mothScore} moonlit gates. Take a breath and try again whenever you like.`;
+    mothStartButton.textContent="Fly again";
+    mothOverlay.style.display="flex";
   }
 
-  function addBatPipe(){
+  function addMothPipe(){
     const gap=142;
     const minTop=62;
-    const maxTop=batCanvas.height-gap-62;
+    const maxTop=mothCanvas.height-gap-62;
     const top=minTop+Math.random()*(maxTop-minTop);
-    batPipes.push({x:batCanvas.width+28,top,gap,passed:false,w:62});
+    mothPipes.push({x:mothCanvas.width+28,top,gap,passed:false,w:62});
   }
 
   function circleRectHit(cx,cy,r,rx,ry,rw,rh){
@@ -2936,98 +2936,98 @@ dex<!doctype html>
     return dx*dx+dy*dy<r*r;
   }
 
-  function drawBatBackground(){
-    const g=batCtx.createLinearGradient(0,0,0,batCanvas.height);
+  function drawMothBackground(){
+    const g=mothCtx.createLinearGradient(0,0,0,mothCanvas.height);
     g.addColorStop(0,"#eee7dc");
     g.addColorStop(1,"#dcd0d7");
-    batCtx.fillStyle=g;
-    batCtx.fillRect(0,0,batCanvas.width,batCanvas.height);
+    mothCtx.fillStyle=g;
+    mothCtx.fillRect(0,0,mothCanvas.width,mothCanvas.height);
 
-    batCtx.globalAlpha=.42;
-    batCtx.fillStyle="#fffaf1";
-    batCtx.beginPath();batCtx.arc(620,82,34,0,Math.PI*2);batCtx.fill();
-    batCtx.globalAlpha=1;
+    mothCtx.globalAlpha=.42;
+    mothCtx.fillStyle="#fffaf1";
+    mothCtx.beginPath();mothCtx.arc(620,82,34,0,Math.PI*2);mothCtx.fill();
+    mothCtx.globalAlpha=1;
 
-    batCtx.strokeStyle="rgba(69,48,73,.10)";
-    batCtx.lineWidth=2;
+    mothCtx.strokeStyle="rgba(69,48,73,.10)";
+    mothCtx.lineWidth=2;
     for(let i=0;i<7;i++){
       const y=335+i*15;
-      batCtx.beginPath();
-      batCtx.moveTo(0,y);
-      for(let x=0;x<=760;x+=38) batCtx.lineTo(x,y+Math.sin(x*.035+i)*5);
-      batCtx.stroke();
+      mothCtx.beginPath();
+      mothCtx.moveTo(0,y);
+      for(let x=0;x<=760;x+=38) mothCtx.lineTo(x,y+Math.sin(x*.035+i)*5);
+      mothCtx.stroke();
     }
   }
 
-  function drawBatPipe(p){
-    batCtx.fillStyle="rgba(69,48,73,.30)";
-    batCtx.fillRect(p.x,0,p.w,p.top);
-    batCtx.fillRect(p.x,p.top+p.gap,p.w,batCanvas.height-(p.top+p.gap));
-    batCtx.fillStyle="rgba(69,48,73,.12)";
-    batCtx.fillRect(p.x-6,p.top-8,p.w+12,8);
-    batCtx.fillRect(p.x-6,p.top+p.gap,p.w+12,8);
+  function drawMothPipe(p){
+    mothCtx.fillStyle="rgba(69,48,73,.30)";
+    mothCtx.fillRect(p.x,0,p.w,p.top);
+    mothCtx.fillRect(p.x,p.top+p.gap,p.w,mothCanvas.height-(p.top+p.gap));
+    mothCtx.fillStyle="rgba(69,48,73,.12)";
+    mothCtx.fillRect(p.x-6,p.top-8,p.w+12,8);
+    mothCtx.fillRect(p.x-6,p.top+p.gap,p.w+12,8);
   }
 
-  function drawBat(){
-    batCtx.save();
-    batCtx.translate(bat.x,bat.y);
-    batCtx.rotate(Math.max(-.45,Math.min(.8,bat.vy*.045)));
-    batCtx.font="32px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif";
-    batCtx.textAlign="center";
-    batCtx.textBaseline="middle";
-    batCtx.fillText("🦋",0,0);
-    batCtx.restore();
+  function drawMoth(){
+    mothCtx.save();
+    mothCtx.translate(moth.x,moth.y);
+    mothCtx.rotate(Math.max(-.45,Math.min(.8,moth.vy*.045)));
+    mothCtx.font="32px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif";
+    mothCtx.textAlign="center";
+    mothCtx.textBaseline="middle";
+    mothCtx.fillText("🦋",0,0);
+    mothCtx.restore();
   }
 
-  function drawBatScene(){
-    drawBatBackground();
-    batPipes.forEach(drawBatPipe);
-    drawBat();
+  function drawMothScene(){
+    drawMothBackground();
+    mothPipes.forEach(drawMothPipe);
+    drawMoth();
   }
 
-  function batLoop(now){
-    if(!batRunning)return;
-    const dt=Math.min(.032,(now-batLastTime)/1000||.016);
-    batLastTime=now;
-    batWorld+=dt;
-    bat.vy+=18.5*dt;
-    bat.y+=bat.vy*dt;
-    batSpawn+=dt;
+  function mothLoop(now){
+    if(!mothRunning)return;
+    const dt=Math.min(.032,(now-mothLastTime)/1000||.016);
+    mothLastTime=now;
+    mothWorld+=dt;
+    moth.vy+=18.5*dt;
+    moth.y+=moth.vy*dt;
+    mothSpawn+=dt;
 
-    if(batSpawn>.95){addBatPipe();batSpawn=0;}
-    batPipes.forEach(p=>p.x-=185*dt);
+    if(mothSpawn>.95){addMothPipe();mothSpawn=0;}
+    mothPipes.forEach(p=>p.x-=185*dt);
 
-    for(const p of batPipes){
-      if(!p.passed && p.x+p.w<bat.x){p.passed=true;batScore++;batScoreDisplay.textContent=String(batScore);}
-      if(circleRectHit(bat.x,bat.y,bat.r,p.x,0,p.w,p.top) || circleRectHit(bat.x,bat.y,bat.r,p.x,p.top+p.gap,p.w,batCanvas.height-(p.top+p.gap))){endBat();break;}
+    for(const p of mothPipes){
+      if(!p.passed && p.x+p.w<moth.x){p.passed=true;mothScore++;mothScoreDisplay.textContent=String(mothScore);}
+      if(circleRectHit(moth.x,moth.y,moth.r,p.x,0,p.w,p.top) || circleRectHit(moth.x,moth.y,moth.r,p.x,p.top+p.gap,p.w,mothCanvas.height-(p.top+p.gap))){endMoth();break;}
     }
-    batPipes=batPipes.filter(p=>p.x>-90);
-    if(bat.y-bat.r<0 || bat.y+bat.r>batCanvas.height){endBat();}
+    mothPipes=mothPipes.filter(p=>p.x>-90);
+    if(moth.y-moth.r<0 || moth.y+moth.r>mothCanvas.height){endMoth();}
 
-    drawBatScene();
-    if(batRunning)batRAF=requestAnimationFrame(batLoop);
+    drawMothScene();
+    if(mothRunning)mothRAF=requestAnimationFrame(mothLoop);
   }
 
-  function batInput(e){
+  function mothInput(e){
     if(e) e.preventDefault();
-    flapBat();
+    flapMoth();
   }
 
-  openFlappyBatButton.addEventListener("click",()=>{
+  openFlappyMothButton.addEventListener("click",()=>{
     wordSearchScreen.style.display="none";
     prizeScreen.classList.remove("show");
-    flappyBatScreen.classList.add("show");
-    flappyBatScreen.setAttribute("aria-hidden","false");
-    resetBatScene();
-    setTimeout(()=>batCanvas.focus?.(),30);
+    flappyMothScreen.classList.add("show");
+    flappyMothScreen.setAttribute("aria-hidden","false");
+    resetMothScene();
+    setTimeout(()=>mothCanvas.focus?.(),30);
   });
-  batStartButton.addEventListener("click",startBat);
-  batResetButton.addEventListener("click",resetBatScene);
-  batBackButton.addEventListener("click",showWordSearch);
-  batCanvas.addEventListener("pointerdown",batInput,{passive:false});
+  mothStartButton.addEventListener("click",startMoth);
+  mothResetButton.addEventListener("click",resetMothScene);
+  mothBackButton.addEventListener("click",showWordSearch);
+  mothCanvas.addEventListener("pointerdown",mothInput,{passive:false});
   document.addEventListener("keydown",e=>{
-    if(!flappyBatScreen.classList.contains("show"))return;
-    if(e.code==="Space"){batInput(e);}
+    if(!flappyMothScreen.classList.contains("show"))return;
+    if(e.code==="Space"){mothInput(e);}
   },{passive:false});
 
   /* =======================================================
